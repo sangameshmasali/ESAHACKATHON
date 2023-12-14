@@ -4,3 +4,5 @@
 
 /assetmanagement/.vs/assetmanagement
 /.vs
+/assetmanagement/assetmanagement/bin/Debug/netcoreapp3.1
+/assetmanagement/assetmanagement/obj/Debug/netcoreapp3.1
