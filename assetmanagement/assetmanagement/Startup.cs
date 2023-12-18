@@ -1,3 +1,7 @@
+using assetmanagement.Interface;
+using assetmanagement.Model;
+using assetmanagement.Repository;
+using assetmanagement.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +30,13 @@ namespace assetmanagement
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
+            services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<IUserRepository, UserRepository>();
+
+
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
