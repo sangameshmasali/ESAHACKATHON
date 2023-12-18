@@ -9,10 +9,20 @@
     <None Remove="Repository\" />
     <None Remove="Model\" />
     <None Remove="Interface\" />
+    <None Remove="Service\" />
+    <None Remove="MailKit" />
+    <None Remove="System.Data.SqlClient" />
+    <None Remove="Newtonsoft.Json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repository\" />
     <Folder Include="Model\" />
     <Folder Include="Interface\" />
+    <Folder Include="Service\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="4.3.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 </Project>
