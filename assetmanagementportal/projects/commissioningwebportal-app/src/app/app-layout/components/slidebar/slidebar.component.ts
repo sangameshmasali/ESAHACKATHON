@@ -57,6 +57,26 @@ export class SlideBarComponent implements AfterViewInit, OnInit {
         }
     }
 
+    navtoUseScreen(){
+        this.router.navigate([this.genericConfigurationService.routePath.concat('/user')]);
+        if(this.sidenav.mode =='over'){
+        this.collapse = this.collapse;
+        this.sidenav.close();
+        }else{
+            //this.collapse = !this.collapse;
+        }
+    }
+
+    navRequestsScreen(){
+        this.router.navigate([this.genericConfigurationService.routePath.concat('/request')]);
+        if(this.sidenav.mode =='over'){
+        this.collapse = this.collapse;
+        this.sidenav.close();
+        }else{
+            //this.collapse = !this.collapse;
+        }
+    }
+
     profileClick(){
         if(this.sidenav.mode =='over'){
             this.collapse = !this.collapse;

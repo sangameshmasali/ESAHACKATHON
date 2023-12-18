@@ -13,11 +13,12 @@ import { flagService } from '../../../services/flag-service';
 import { CreateassetComponent } from '../createasset/createasset.component';
 
 @Component({
-  selector: 'app-saved-configuration',
-  templateUrl: './saved-configuration.component.html',
-  styleUrls: ['./saved-configuration.component.scss']
+  selector: 'app-assetrequest',
+  templateUrl: './assetrequest.component.html',
+  styleUrls: ['./assetrequest.component.scss']
 })
-export class SavedConfigurationComponent implements OnInit {
+export class AssetrequestComponent implements OnInit {
+
 
   portalConfigData: any;
   noConfig: boolean = false;
@@ -201,4 +202,5 @@ export class SavedConfigurationComponent implements OnInit {
       dismiss => { }
     );
   }
+
 }

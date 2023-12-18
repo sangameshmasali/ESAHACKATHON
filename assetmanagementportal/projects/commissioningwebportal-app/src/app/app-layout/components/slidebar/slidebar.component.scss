@@ -112,6 +112,10 @@ mat-sidenav-content.mat-drawer-content.mat-sidenav-content.padded {
     }
 }
 
+.alter-heading{
+    padding-left: 25px;
+}
+
 @media screen and (max-width: 1023px) {
     .mat-drawer-content {
         padding: 2px 15px 2px 16px !important;
