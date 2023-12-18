@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using assetmanagement.Interface;
+using assetmanagement.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
@@ -26,11 +27,11 @@ namespace assetmanagement.Controllers
 
         [HttpGet]
         [Route("api/GetUserDetails")]
-        public IEnumerable<string> GetUserDetails()
+        public async Task<Employee> GetUserDetails()
         {
             var v = _configuration.GetValue<string>("ConnectionStrings");
-            _userRepository.GetUserDetailsFromDb(_configuration.GetValue<string>("ConnectionStrings"));
-            return new string[] { "value1", "value2" };
+            var employee = _userRepository.GetUserDetailsFromDb(_configuration.GetValue<string>("ConnectionStrings"));
+            return employee.Result;
         }
 
         // GET api/values/5
