@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using assetmanagement.Interface;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,11 +13,23 @@ namespace assetmanagement.Controllers
     //[Route("api/[controller]")]
     public class UserController : Controller
     {
+        private IConfiguration _configuration { get; }
+        private IUserRepository _userRepository { get; }
 
-        // GET: api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
+        public UserController(IConfiguration configuration, IUserRepository userRepository)
         {
+            _configuration = configuration;
+            _userRepository = userRepository;
+        }
+
+
+
+        [HttpGet]
+        [Route("api/GetUserDetails")]
+        public IEnumerable<string> GetUserDetails()
+        {
+            var v = _configuration.GetValue<string>("ConnectionStrings");
+            _userRepository.GetUserDetailsFromDb(_configuration.GetValue<string>("ConnectionStrings"));
             return new string[] { "value1", "value2" };
         }
 
