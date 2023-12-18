@@ -1,0 +1,82 @@
+<div class="row header-page">
+    <div class="col-md-3 col-sm-12">
+    </div>
+    <div class="col-md-9 col-sm-12 headeradjust">
+        <div class="row text-right text-end position-relative">
+            <div class="progress-bar-style position-absolute"></div>
+            <div [ngClass]="selectedController=='ab300'?'status':'' " class="steps d-flex p-0">
+                <div [ngClass]="{'active': detailsPage == true }" class="details inactive"></div>
+                <div [ngClass]="{'active': controllerSettingPage == true}" class="controller inactive"></div>
+                <div [ngClass]="{'active': washerSettingPage == true}" class="washer inactive"></div>
+                <div *ngIf="selectedController!='ab300'" [ngClass]="{'active': formulaPage == true}"
+                    class="formula inactive"></div>
+                <div [ngClass]="{'active': reviewFinalize == true}" class="review inactive"></div>
+            </div>
+            <div class="col mt-1 p-1">
+                <a [ngClass]="{'detailsFill': controllerSettingPage == true}" class="font-12 black-col non-clickable"
+                    [routerLink]="['/dashboard/configuration/configuration-details']">
+                    <span>
+                        <div>Configuration</div>
+                        <div> Details</div>
+                    </span>
+                </a>
+            </div>
+            <div class="col mt-1 p-1">
+                <a *ngIf="selectedController != 'alcs'" [ngClass]="{'detailsFill': washerSettingPage == true}" class="font-12 black-col non-clickable"
+                    [routerLink]="['/dashboard/configuration/controller-productsetting']">
+                    <span>
+                        <div>Controller Configuration & </div>
+                        <div>Product Settings</div>
+                    </span>
+                </a>
+                <a *ngIf="selectedController == 'alcs'" [ngClass]="{'detailsFill': washerSettingPage == true}" class="font-12 black-col non-clickable"
+                    [routerLink]="['/dashboard/configuration/alcscontroller-pumpsetting']">
+                    <span>
+                        <div>Controller Configuration & </div>
+                        <div>Product Settings</div>
+                    </span>
+                </a>
+            </div>
+            <div class="col mt-1 p-1">
+                <a *ngIf="selectedController!='ab300'" [ngClass]="{'detailsFill': formulaPage == true}"
+                    class="font-12 black-col non-clickable" [routerLink]="['/dashboard/configuration/washersettings']">
+                    <span>
+                        <div>Washer</div>
+                        <div>Settings</div>
+                    </span>
+                </a>
+                <a *ngIf="selectedController=='ab300'" [ngClass]="{'detailsFill': formulaPage == true}"
+                    class="font-12 black-col non-clickable" [routerLink]="['/dashboard/configuration/watersettings']">
+                    <span>
+                        <div>Washer</div>
+                        <div>Settings</div>
+                    </span>
+                </a>
+            </div>
+            <div *ngIf="selectedController!='ab300'" class="col mt-1 p-1">
+                <a  class="font-12 black-col non-clickable" [ngClass]="{'detailsFill': reviewFinalize == true}"
+                    class="font-12 black-col non-clickable" [routerLink]="['/dashboard/configuration/formula']">
+                    <div>Formula</div>
+                </a>
+            </div>
+            <div class="col mt-1 p-1">
+                <a *ngIf="selectedController!='ab300'" class="font-12 black-col non-clickable"
+                    [ngClass]="{'detailsFill': editConfig == true}" class="font-12 black-col non-clickable"
+                    [routerLink]="['/dashboard/configuration/reviewfinalise']">
+                    <span>
+                        <div>Review &</div>
+                        <div>Finalise</div>
+                    </span>
+                </a>
+                <a *ngIf="selectedController=='ab300'" class="font-12 black-col non-clickable"
+                    [ngClass]="{'detailsFill': editConfig == true}" class="font-12 black-col non-clickable"
+                    [routerLink]="['/dashboard/configuration/ab300-reviewandfinalise']">
+                    <span>
+                        <div>Review &</div>
+                        <div>Finalise</div>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

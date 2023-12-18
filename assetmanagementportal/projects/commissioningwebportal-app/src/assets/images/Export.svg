@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="84" height="21" viewBox="0 0 84 21">
+  <g id="Export" transform="translate(0.5 0.5)">
+    <rect id="Rectangle" width="83" height="20" rx="1" fill="none" stroke="#d4e5f9" stroke-linecap="square" stroke-width="1"/>
+    <text id="Export-List" transform="translate(26 13)" fill="#4a4a4a" font-size="10" font-family="Helvetica Neue"><tspan x="0" y="0">Export List</tspan></text>
+    <g id="next" transform="translate(16 5) rotate(90)">
+      <path id="Shape" d="M5,9.992A5,5,0,1,0,0,5,5,5,0,0,0,5,9.992ZM5,.4A4.592,4.592,0,1,1,.4,5,4.6,4.6,0,0,1,5,.4Z" fill="#2c2f33"/>
+      <path id="Path" d="M3.67,7.537a.307.307,0,0,0,.434,0L6.41,5.231a.307.307,0,0,0,0-.434L4.1,2.491a.307.307,0,0,0-.434.434L5.758,5.014,3.67,7.1A.311.311,0,0,0,3.67,7.537Z" fill="#00416a" fill-rule="evenodd"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,710 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+// import external files
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import "~font-awesome/css/font-awesome.css";
+@import "spinner";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+// Global color
+
+$blue: #0086E9;
+$leftnav-col: #3E3E3C;
+$header-title-col: #9B9EAC;
+$black: #3E3E3C;
+$left-back: #F7F7F7;
+$white: #FFFFFF;
+$border-col: #7B7B7B;
+$red: red;
+
+// Font-Size
+
+.blue {
+    color: $blue;
+}
+
+.white {
+    color: #fff;
+}
+
+.left-nav-col {
+    color: $leftnav-col;
+}
+
+.font-10 {
+    font-size: 10px;
+}
+
+.font-11 {
+    font-size: 11px;
+}
+
+.font-12 {
+    font-size: 12px;
+}
+
+.font-14 {
+    font-size: 14px;
+}
+
+.font-15 {
+    font-size: 15px;
+}
+
+.font-16 {
+    font-size: 16px;
+}
+
+.font-18 {
+    font-size: 18px;
+}
+
+.font-20 {
+    font-size: 20px;
+}
+
+.font-24 {
+    font-size: 24px;
+}
+
+.fw-normal {
+    font-weight: normal;
+}
+
+.table-header {
+    color: $header-title-col;
+}
+
+.table-odd-row-col>tbody>tr:nth-of-type(odd)>* {
+    background: #F5F6FA;
+}
+
+.table>:not(:first-child),
+.table>:not(caption)>*>* {
+    border: none;
+    font-size: 14px;
+    padding: 19.5px 11px;
+    text-align: left;
+}
+
+
+
+
+body {
+    font-family: Helvetica;
+    font-weight: 400;
+    padding: 20px 25px;
+}
+
+.main-container {
+    margin-left: 18px;
+}
+
+ol,
+li,
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+// left nav style letter we can move this
+
+
+.left-nav {
+    background: #F7F7F7;
+    border-radius: 15px;
+    max-height: 100%;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    color: $blue;
+}
+
+a.black-col {
+    color: $black;
+
+    :hover {
+        color: $black;
+    }
+}
+
+.header-background {
+    background-color: $blue;
+}
+
+.border-blue {
+    border-color: $blue;
+}
+
+label {
+    color: $black;
+}
+
+.logo-text {
+    color: $black;
+    line-height: 18px;
+}
+
+.red {
+    color: $red !important;
+}
+
+.config-list.selected div {
+    background: #3E3E3C1F;
+    padding: 12px 14px 12px 26px;
+    display: inline-block;
+}
+
+.child-list {
+    background: #0086E90A;
+    border-left: 6px solid $blue;
+}
+
+
+
+.blue-text {
+    color: $blue;
+}
+
+// custom button styels
+
+.defaultbtn {
+    background: #0086E9 0% 0% no-repeat padding-box;
+    color: $white;
+    font-size: 16px;
+    border-radius: 4px;
+    padding: 12px 19.37px;
+    border: 1px solid #0086E9;
+    font-family: Helvetica;
+
+    &.btn-next {
+        width: 210px;
+
+    }
+
+    &.btnback {
+        color: $blue;
+    }
+}
+
+
+// form style 
+.form-control,
+.ng-select .ng-select-container {
+    border-color: $border-col;
+    padding: 6.5px 10px;
+    width: 366px;
+    color: $black;
+
+    &:focus {
+        border-color: $border-col;
+        box-shadow: none;
+    }
+}
+
+.form-layout {
+    width: 65.4%;
+    margin: 30px 30px 10px;
+}
+
+// ng select global style 
+
+// ng select dropdown scrollbar when multiple select
+.scrollbar {
+    .ng-select-container.ng-has-value {
+        max-height: 130px;
+        overflow: auto;
+    }
+}
+
+.scrollbar {
+    .ng-value-container {
+        max-height: 130px;
+    }
+}
+
+.conditional-disabled {
+    .ng-dropdown-panel .ng-option-disabled {
+        color: #ccc !important;
+        background-color: $white;
+    }
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+    background-color: $blue;
+    color: #ffffff;
+}
+
+.ng-select .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+    white-space: inherit;
+}
+
+.ng-select .ng-select-container {
+    border: 1px solid $border-col;
+}
+
+.ng-select.ng-select-single .ng-select-container .ng-value-container {
+    padding: 0;
+}
+
+.ng-select.ng-select-single .ng-select-container {
+    height: auto;
+}
+
+.ng-select .ng-select-container .ng-value-container .ng-placeholder {
+    color: $border-col;
+}
+
+.ng-select-searchable.ng-select .ng-arrow-wrapper .ng-arrow,
+.collapse-card,
+.collapse-card.collapsed,
+.down-arrow {
+    background-image: url(/assets/images/Arrow-up.svg);
+    height: 20px;
+    width: 21px;
+    display: block;
+    background-repeat: no-repeat;
+    border: none;
+    top: 5px;
+}
+
+.collapse-card {
+    margin-top: 7px;
+    height: 11px;
+}
+
+.ng-select .ng-arrow-wrapper {
+    width: 18px;
+}
+
+.ng-select.ng-select-opened>.ng-select-container .ng-arrow,
+.collapse-card,
+.active .down-arrow {
+    background-image: url(/assets/images/Arrow-down.svg);
+}
+
+.formula-details-section .ng-select-searchable.ng-select .ng-arrow-wrapper .ng-arrow {
+    background-image: url(/assets/images/Dropdown-down-arrow.svg);
+    height: 18px;
+    width: 21px;
+    display: block;
+    background-repeat: no-repeat;
+    border: none;
+    top: -3px;
+}
+
+.formula-details-section .ng-select .ng-arrow-wrapper {
+    width: 18px;
+}
+
+.formula-details-section .ng-select.ng-select-opened>.ng-select-container .ng-arrow {
+    background-image: url(/assets/images/Dropdown-up-arrow.svg);
+}
+
+
+// this code we have to move in formula page
+.formula-details-section .ng-select .ng-select-container {
+    min-height: 30px;
+    height: 30px;
+}
+
+
+
+
+// page min-height define here
+
+.min-height {
+    min-height: 613px;
+}
+
+
+/*form*/
+
+// .form {
+//     .ng-invalid.ng-touched.form-control,
+//     .ng-invalid.ng-touched.form-control:focus,
+//     .ng-invalid.form-control,
+//     .ng-invalid.form-control:focus,
+//     .ng-dirty.ng-invalid.form-control,
+//     .ng-dirty.ng-invalid.form-control:focus,
+//     ng-select.ng-invalid.ng-touched .ng-select-container {
+//         border-color: #dc3545 !important;
+//         box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 3px #fde6e8;
+//     }
+// }
+/*form*/
+
+//commented ablove line code to prevent the highlight of input box without touching the inputbox
+.form {
+
+    .ng-invalid.ng-touched.form-control,
+    .ng-invalid.ng-touched.form-control:focus,
+    ng-select.ng-invalid.ng-touched .ng-select-container {
+        border-color: #dc3545 !important;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 3px #fde6e8;
+    }
+}
+
+.form.formsubmitted {
+    .ng-invalid.form-control,
+    ng-select.ng-invalid .ng-select-container,
+    input[type=radio].ng-invalid //radio button
+
+        {
+        border-color: #dc3545 !important;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 3px #fde6e8;
+    }
+
+    .ng-invalid .ngb-tp {
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 3px #fde6e8;
+    }
+}
+
+.left-padding-card {
+    padding-left: 30px;
+}
+
+.ng-select.ng-select-disabled>.ng-select-container {
+    background-color: #e9ecef;
+}
+
+.ng-select.ng-select-disabled>.ng-select-container .ng-arrow-wrapper {
+    display: none;
+}
+
+.down-arrow {
+    height: 10px;
+    margin-top: 8px;
+}
+
+
+.add-washer {
+    button {
+        width: 348px;
+        padding: 8px 0;
+    }
+}
+
+// .form-control:disabled,
+// .form-control[readonly] {
+//     background-color: #fff;
+// }
+
+.btn-disable {
+    background: none;
+}
+
+.btn-disable:disabled {
+    opacity: 0.3;
+}
+
+.h-auto {
+    margin-bottom: 30px;
+}
+
+.accordion-toggle {
+    display: none;
+}
+
+.active {
+    .accordion-toggle {
+        display: block;
+    }
+}
+
+
+.modal-content button.close {
+    color: $blue;
+    font-size: 24px;
+    align-self: baseline;
+}
+
+.modal {
+    text-align: center;
+    padding: 0 !important;
+}
+
+.modal:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -4px;
+    /* Adjusts for spacing */
+}
+
+.modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+    width: 500px;
+}
+
+.active .accordion-toggle {
+    margin-bottom: 20px;
+}
+
+
+.defaultbtn.btn-next.btn-width:disabled {
+    pointer-events: none;
+    opacity: .45;
+}
+
+.defaultbtn.btn-next.w-auto:disabled {
+    pointer-events: none;
+    opacity: .45;
+}
+
+
+
+// Mobile Responsive code goes here
+@media screen and (max-width: 1024px) {
+    body {
+        padding: 0;
+    }
+
+    .form-layout {
+        width: 100%;
+        margin: 0;
+    }
+
+    .min-height {
+        min-height: auto;
+    }
+
+    .mobile-bot-paddibg {
+        padding-bottom: 20px;
+    }
+
+    .cart-body-mobile {
+        padding: 10px !important;
+    }
+
+    .margin-0-mobile {
+        margin-bottom: 0 !important;
+    }
+
+    .mobile-margin-bottom {
+        margin-bottom: 20px;
+    }
+}
+
+//Style for drag and drop module
+.container {
+    width: 80%;
+    margin: 5px 5px 5px 25px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+}
+
+.movie-list {
+    width: 80%;
+    border: solid 1px #ccc;
+    min-height: 60px;
+    display: inline-block;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-left: 40px;
+}
+
+.movie-block {
+    padding: 2px 10px;
+    border-bottom: solid 1px #ccc;
+    color: rgba(0, 0, 0, 0.87);
+    box-sizing: border-box;
+    cursor: move;
+    background: $white;
+}
+
+
+
+.cdk-drag-preview {
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+    opacity: 0;
+}
+
+.cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.movie-block:last-child {
+    border: none;
+}
+
+.movie-list.cdk-drop-list-dragging .movie-block:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.capacity-pad {
+    margin-top: 2px;
+    color: #808080;
+    font-size: 14px;
+    padding-right: 20px;
+}
+
+.modal-body-drag {
+    text-align: left;
+    padding: 10px;
+}
+
+.top-margin-share {
+    margin-top: 10px;
+}
+
+.bottom-margin-share {
+    margin-bottom: 15px;
+}
+
+.left-margin-share {
+    margin-left: 10px;
+}
+
+.font-share {
+    font-size: 15px;
+}
+
+@media screen and (max-width: 1024px) {
+    body {
+        padding: 0;
+    }
+
+    .form-layout {
+        width: 100%;
+        margin: 0;
+    }
+
+    .min-height {
+        min-height: auto;
+    }
+
+    .defaultbtn {
+        margin-bottom: 10px;
+        padding: 5px 10px;
+        font-size: 8px;
+    }
+
+    .defaultbtn.btn-next {
+        width: 100%;
+        margin: 10px 3px;
+    }
+
+    .mobile-bot-paddibg {
+        padding-bottom: 20px;
+    }
+
+    .cart-body-mobile {
+        padding: 10px !important;
+    }
+
+    .margin-0-mobile {
+        margin-bottom: 0 !important;
+    }
+
+    .mobile-margin-bottom {
+        margin-bottom: 20px;
+    }   
+}
+
+@media screen and (max-width: 1023px) {
+    .cust-margin{
+        margin-right: 20px !important;
+    }
+  
+    .cust-display{
+        display: flex !important;
+        flex-direction: row-reverse;
+    }
+    .cust-display-account{
+    display: flex !important;
+    flex-direction: row-reverse;
+    padding-right: 11% !important;
+    }
+    .cust-container {
+        display: flex;
+        width: 100%;
+        margin: 0px;
+        padding-left: 105px;
+      }
+      .cust-display-config-list{
+        display: flex !important;
+        flex-direction: row-reverse;
+        border-right: 6px solid #0086E9;
+        border-left: none !important;
+        width: 100%;
+        padding: 12px 14px 12px 26px;
+        background-color: (0, 134, 233, 0.0392156863);
+      }
+      .cust-men-display{
+        position: relative !important;
+        right: 80px !important;
+        top: 1px !important;
+      }
+      .left-padding-card{
+        padding-left: 5px;
+      }
+   
+}
+@media screen and (max-width: 1023px) {
+   
+    .mat-drawer{
+        right:0;
+        width: 100%;
+    }
+    mat-icon.mat-icon.notranslate.mat-list-icon.iconmenu.cust-toolbar.material-icons.mat-ligature-font.mat-icon-no-color{
+    position: fixed;
+    right: 23px;
+    top: 15px;
+    }
+    .btn-combine {
+        display: contents;
+        width: 50%;
+    }
+
+    .defaultbtn {
+        margin-bottom: 10px;
+        padding: 5px 10px;
+        font-size: 8px;
+    }
+
+    .defaultbtn.btn-next {
+        width: auto;
+        margin: 10px 3px;
+    }
+    
+    .mt-3 {
+        margin-top: 0.5rem !important;
+    }
+    
+    .mat-body, .mat-body-1, .mat-typography .mat-body, .mat-typography .mat-body-1, .mat-typography{
+        font: 400 12px/20px Roboto, "Helvetica Neue", sans-serif;
+    }
+
+    .modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+        width: -webkit-fill-available;
+    }
+    .left-padding-card{
+        padding-left: 5px;
+      }
+}

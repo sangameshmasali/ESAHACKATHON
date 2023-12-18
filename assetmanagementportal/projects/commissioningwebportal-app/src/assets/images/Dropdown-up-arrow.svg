@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Dropdown" transform="translate(0 24) rotate(-90)">
+    <path id="Shape" d="M0,0H24V24H0Z" fill="none" fill-rule="evenodd"/>
+    <path id="Shape-2" data-name="Shape" d="M8.6,7.4,10,6l6,6-6,6L8.6,16.6,13.2,12Z" fill="#0086e9"/>
+  </g>
+</svg>

@@ -1,0 +1,57 @@
+.header-page {
+    background: #F7F7F7;
+    border-radius: 10px;
+    padding: 20px 29px;
+}
+
+
+.steps .inactive {
+    height: 6px;
+    background-color: #D8D8D8;
+    width: 20%;
+
+    &.active {
+        background-color: #0086E9;
+    }
+}
+
+.status .inactive {
+
+    width: 25%;
+
+}
+
+.non-clickable {
+    pointer-events: none;
+}
+
+.detailsFill {
+    text-decoration: underline;
+    color: #0086E9;
+    pointer-events: inherit;
+}
+
+
+// Responsive mobile code
+
+@media screen and (max-width: 767px) {
+    .header-page {
+        padding: 0;
+    }
+}
+
+@media screen and (min-width:1024px) and (max-width:1462px) {
+    .detailsFill {
+        font-size: 10px;
+    }
+
+    .headeradjust {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1023px) {}
+
+.status {
+    justify-content: flex-end;
+}

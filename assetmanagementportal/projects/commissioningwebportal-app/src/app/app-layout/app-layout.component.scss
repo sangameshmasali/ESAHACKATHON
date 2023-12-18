@@ -1,0 +1,18 @@
+.width-leftnav {
+    width: 270px;
+}
+
+// responsive specific resolutions
+@media screen and (min-width:1024px) and (max-width:1422px) {
+    .width-leftnav {
+        width: auto;
+    }
+}
+// Responsive mobile code
+
+
+@media screen and (max-width: 767px) {
+    .width-leftnav {
+        width: 100%;
+    }
+}

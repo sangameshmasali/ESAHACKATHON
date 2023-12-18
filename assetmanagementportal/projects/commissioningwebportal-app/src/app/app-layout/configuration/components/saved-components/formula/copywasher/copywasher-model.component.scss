@@ -1,0 +1,47 @@
+::ng-deep .mat-h4,
+.mat-subheading-1,
+.mat-typography .mat-h4,
+.mat-typography .mat-subheading-1,
+.mat-typography h4 {
+    font: 24px "Helvetica" !important;
+    letter-spacing: normal;
+    margin: 0px 0 5px !important;
+    // margin: 10px 0 16px !important;
+}
+
+.title {
+    font-family: Helvetica !important;
+}
+
+::ng-deep .mat-body,
+.mat-body-1,
+.mat-typography .mat-body,
+.mat-typography .mat-body-1,
+.mat-typography {
+    font-size: initial !important;
+    font-family: Helvetica !important;
+    font-weight: 400 !important;
+}
+
+::ng-deep modal-header {
+    padding: 20px 10px 10px 16px !important;
+}
+
+.modal-body {
+    padding: 25px 15px 25px 15px !important;
+}
+
+@media screen and (max-width: 1023px) {
+    .mat-h4 {
+        font: 400 25px/24px Roboto, "Helvetica Neue", sans-serif !important;
+        margin: 5px 0 5px !important;
+    }
+    .modal-body {
+        padding: 10px 15px 4px 15px !important;
+    }
+
+    .defaultbtn.btn-next {
+        width: 100%;
+        margin: 0px 0px;
+    }
+}

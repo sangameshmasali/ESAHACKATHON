@@ -1,0 +1,398 @@
+<app-header></app-header>
+<form id="reviewform" [ngClass]="{'formsubmitted': !!reviewfinaliseForm['submitted']}" [formGroup]="reviewfinaliseForm"
+    novalidate>
+    <div class="review-page">
+        <div class="d-flex mb-3">
+            <div class="scls-heading font-24 p-0 mt-4">
+                {{this.masterData?.configurationDetails?.Name}}
+            </div>
+        </div>
+        <div class="row font-12">
+            <div class="col-md-4 col-sm-12">
+                <div class="formula-section card-header card border-blue header-background white font-12 px-2 d-flex">
+                    <div class="d-flex justify-content-between">
+                        <span>Controller Configuration</span>
+                        <span class="cursor-pointer" (click)="onEditClick('productsetting','')">
+                            <img src="/assets/images/Edit-White.svg">
+                        </span>
+                    </div>
+                </div>
+                <div class="d-flex flex-column p-0 border-1">
+                    <div class="d-flex justify-content-between row-style">
+                        <div class="">
+                            Region
+                        </div>
+                        <div class="">
+                            {{this.masterData?.controllerProductSettings?.Region}}
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between row-style">
+                        <div class="">
+                            Unit of measure
+                        </div>
+                        <div class="">
+                            {{this.masterData?.controllerProductSettings?.UnitOfMeasure?.value}}
+                        </div>
+
+                    </div>
+                    <div class="d-flex justify-content-between row-style">
+                        <div class="">
+                            Number of washers
+                        </div>
+                        <div class="">
+                            {{this.masterData?.washersettings?.length}}
+                        </div>
+
+                    </div>
+                    <!-- <div class="d-flex justify-content-between row-style">
+                        <div class="">
+                            Formula selector
+                        </div>
+                        <div class="">
+                            {{this.masterData?.controllerProductSettings?.FormulaSelector?.value}}
+                        </div>
+                    </div> -->
+                    <div class="d-flex justify-content-between row-style">
+                        <div class="">
+                            Primary language
+                        </div>
+                        <div class="">
+                            {{this.masterData?.controllerProductSettings?.PrimaryLanguage?.value}}
+                        </div>
+
+                    </div>
+                    <div class="d-flex justify-content-between row-style">
+                        <div class="">
+                            Secondary language
+                        </div>
+                        <div class="">
+                            {{this.masterData?.controllerProductSettings?.SecondaryLanguage?.value}}
+                        </div>
+
+                    </div>
+                    <div class="d-flex justify-content-between row-style">
+                        <div class="">
+                            TM language
+                        </div>
+                        <div class="">
+                            {{this.masterData?.controllerProductSettings?.TmLangauage?.value}}
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between row-style">
+                        <div class="">
+                            Time zone
+                        </div>
+                        <div class="">
+                            {{this.masterData?.controllerProductSettings?.TimeZone?.value}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12 responsive-margin">
+                <div class="formula-section card-header card border-blue header-background white font-12 px-2 d-flex">
+                    <div class="d-flex justify-content-between">
+                        <span>Product Configuration</span>
+                        <span class="cursor-pointer" (click)="onEditClick('productsetting','')">
+                            <img src="/assets/images/Edit-White.svg">
+                        </span>
+                    </div>
+                </div>
+                <div class="d-flex flex-column p-0 border-1">
+                    <div class="d-flex justify-content-between row-style">
+                        <div class="">
+                            Pocket 1
+                            <img *ngIf="fetchIsLockFlagfromProduct(this.masterData?.controllerProductSettings?.ProductOne?.value,'-P1')"
+                                height="15px" width="15px" src="/assets/images/Locked.svg">
+                        </div>
+                        <div
+                            [ngClass]="isControllerDataValid('ProductOne',this.masterData?.controllerProductSettings?.ProductOne?.value,'-P1')? ' ':'red'">
+                            {{this.masterData?.controllerProductSettings?.ProductOne?.value}}
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between row-style">
+                        <div class="">
+                            Pocket 2
+                            <img *ngIf="fetchIsLockFlagfromProduct(this.masterData?.controllerProductSettings?.ProductTwo?.value,'-P2')"
+                                height="15px" width="15px" src="/assets/images/Locked.svg">
+                        </div>
+                        <div
+                            [ngClass]="isControllerDataValid('ProductTwo',this.masterData?.controllerProductSettings?.ProductTwo?.value,'-P2')? ' ':'red'">
+                            {{this.masterData?.controllerProductSettings?.ProductTwo?.value}}
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between row-style">
+                        <div class="">
+                            Pocket 3
+                            <img *ngIf="fetchIsLockFlagfromProduct(this.masterData?.controllerProductSettings?.ProductThree?.value,'-P3')"
+                                height="15px" width="15px" src="/assets/images/Locked.svg">
+                        </div>
+                        <div
+                            [ngClass]="isControllerDataValid('ProductThree',this.masterData?.controllerProductSettings?.ProductThree?.value,'-P3')? ' ':'red'">
+                            {{this.masterData?.controllerProductSettings?.ProductThree?.value}}
+                        </div>
+                    </div>
+                    <div *ngIf="this.masterData?.controllerProductSettings?.ProductFour?.value != 'None'"
+                        class="d-flex justify-content-between row-style">
+                        <div class="">
+                            Pocket 4
+                            <img *ngIf="fetchIsLockFlagfromProduct(this.masterData?.controllerProductSettings?.ProductFour?.value,'-P4')"
+                                height="15px" width="15px" src="/assets/images/Locked.svg">
+                        </div>
+                        <div
+                            [ngClass]="isControllerDataValid('ProductFour',this.masterData?.controllerProductSettings?.ProductFour?.value,'-P4')? ' ':'red'">
+                            {{this.masterData?.controllerProductSettings?.ProductFour?.value}}
+                        </div>
+                    </div>
+                    <div *ngIf="(selectedController=='SCLS' && this.masterData?.controllerProductSettings?.ProductFive?.value != 'None') || (selectedController=='LCLS' && this.masterData?.controllerProductSettings?.ProductFive?.value != 'NONE')"
+                        class="d-flex justify-content-between row-style">
+                        <div class="">
+                            <label *ngIf="selectedController=='LCLS'" for="Name" class="">Pocket 5
+                            </label>
+                            <label *ngIf="selectedController!='LCLS'" class="">Liquid Add-on
+                            </label>
+                            <img *ngIf="fetchIsLockFlagfromProduct(this.masterData?.controllerProductSettings?.ProductFive?.value,'-P5')"
+                                height="15px" width="15px" src="/assets/images/Locked.svg">
+                        </div>
+                        <div
+                            [ngClass]="isControllerDataValid('ProductFive',this.masterData?.controllerProductSettings?.ProductFive?.value,'-P5')? ' ':'red'">
+                            {{this.masterData?.controllerProductSettings?.ProductFive?.value}}
+                        </div>
+                    </div>
+                    <div *ngIf="selectedController=='LCLS' && isProductDataAvailable('ProductSix')"
+                        class="d-flex justify-content-between row-style">
+                        <div class="">
+                            <label *ngIf="selectedController=='LCLS'" for="Name" class="">Pocket 6
+                            </label>
+                        </div>
+                        <div>
+                            {{this.masterData?.controllerProductSettings?.ProductSix?.value}}
+                        </div>
+                    </div>
+                    <div *ngIf="selectedController=='LCLS' && isProductDataAvailable('ProductSeven')"
+                        class="d-flex justify-content-between row-style">
+                        <div class="">
+                            <label *ngIf="selectedController=='LCLS'" for="Name" class="">Pocket 7
+                            </label>
+                        </div>
+                        <div>
+                            {{this.masterData?.controllerProductSettings?.ProductSeven?.value}}
+                        </div>
+                    </div>
+                    <div *ngIf="selectedController=='LCLS' && isProductDataAvailable('ProductEight')"
+                        class="d-flex justify-content-between row-style">
+                        <div class="">
+                            <label *ngIf="selectedController=='LCLS'" for="Name" class="">Pocket 8
+                            </label>
+                        </div>
+                        <div>
+                            {{this.masterData?.controllerProductSettings?.ProductEight?.value}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="card mt-4 row mobile-bot-paddibg"
+                *ngFor="let reviewData of reviewSummaray;let parentIndex=index"
+                [ngClass]="hideWasherContent[parentIndex] ? 'active' : '' ">
+
+                <div class="card-header fw-bold font-15 ajust-padding d-flex justify-content-between">
+                    <div class="d-flex align-center">
+                        <span class="me-3"><img src="/assets/images/Move.svg"></span>
+                        <span class="top-pad"> WASHER {{parentIndex+1}}</span>
+                    </div>
+
+                    <div class="img-washer d-flex" (click)="toggleWasher(parentIndex)">
+                        <div class="mr-0 cursor-pointer"><span class="down-arrow"></span></div>
+                    </div>
+
+                </div>
+                <div class="left-right-pad pt-0 mb-4" id="bodycollapse" class="accordion-toggle"
+                    aria-labelledby="cardcollapse" data-bs-parent="#collapsesection">
+
+                    <div class="form-layout row g-4 w-100 m-0">
+                        <div class="col-md-4 col-sm-12">
+                            <div class="device-setting">
+                                <div
+                                    class="formula-section card-header card border-blue header-background white font-12 px-2 d-flex">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Washer settings</span>
+                                        <span class="cursor-pointer" (click)="onEditClick('washer',parentIndex)">
+                                            <img src="/assets/images/Edit-White.svg">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column p-0 border-1 font-12">
+                                    <!-- <div class="d-flex justify-content-between row-style">
+                                        <div class="">
+                                            Washer name
+                                        </div>
+                                        <div class="">
+                                            {{reviewData[0].WasherName}}
+                                        </div>
+                                    </div> -->
+                                    <div class="d-flex justify-content-between row-style">
+                                        <div class="">
+                                            Capacity
+                                        </div>
+                                        <div class="">
+                                            {{reviewData[0].Capacity}} </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between row-style">
+                                        <div class="">
+                                            Signal mode
+                                        </div>
+                                        <div class="">
+                                            {{reviewData[0].SignalMode.value}}
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between row-style">
+                                        <div class="">
+                                            Revert formula
+                                        </div>
+                                        <div class="">
+                                            {{reviewData[0].RevertFormula?.value}}
+                                        </div>
+                                    </div>
+                                    <!-- <div class="d-flex justify-content-between row-style">
+                                        <div class="">
+                                            Post flush time
+                                        </div>
+                                        <div class="">
+                                            {{reviewData[0].PostFlushTime}}
+                                        </div>
+                                    </div> -->
+                                    <div class="d-flex justify-content-between row-style">
+                                        <div class="">
+                                            Advanced signal mode
+                                        </div>
+                                        <div class="">
+                                            {{(reviewData[0].AdvancedSignalMode.value ||
+                                            reviewData[0].AdvancedSignalMode)}}
+                                        </div>
+                                    </div>
+                                    <!-- <div class="d-flex justify-content-between row-style">
+                                        <div class="">
+                                            Signal filter time
+                                        </div>
+                                        <div class="">
+                                            {{reviewData[0].SignalFilterTime}}
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="form-layout row w-100 m-0">
+
+                        <div [ngClass]="{'d-none': formulaSummary.ForumlaName == '(Unused)'}" class="col-md-4 col-sm-12"
+                            *ngFor="let formulaSummary of reviewData[1]?.formulaControlsArray;let i = index">
+                            <div class="form-layout row g-4 w-100 m-0">
+                                <div class="formula-section card border-blue col-md-6 col-sm-12 font-12 w-100 p-0">
+                                    <div
+                                        class="card-header cursor-move card d-block font-12 white header-background px-2">
+                                        <span class="me-2"><img src="/assets/images/Move-1.svg"></span>
+                                        <span> Formula {{formulaSummary.FormulaNumber}}:
+                                            {{formulaSummary.ForumlaName}}</span>
+                                        <span class="float-end cursor-pointer"
+                                            (click)="onEditClick('formula',parentIndex)">
+                                            <img src="/assets/images/Edit-White.svg">
+                                        </span>
+
+                                    </div>
+                                    <div class="forumlas card d-block cust-tiles">
+                                        <div class="formula-details-section">
+                                            <div class="">
+                                                <div>
+                                                    <table
+                                                        class="table table-responsive table-odd-row-col reviewtable mb-0">
+                                                        <thead>
+                                                            <tr class="back-round">
+                                                                <th class="font-10 table-header fw-normal text-center"
+                                                                    scope="col">
+                                                                    {{sucessObjectMessage.Signal}}
+                                                                </th>
+                                                                <th class="font-10 table-header fw-normal text-center"
+                                                                    scope="col">
+                                                                    {{sucessObjectMessage.Product}}</th>
+                                                                <th class="font-10 table-header fw-normal text-center"
+                                                                    scope="col">
+                                                                    <span
+                                                                        *ngIf="reviewData[0].Capacity.split(' ')[1].toLowerCase()==sucessObjectMessage.uomlb;else capacityPerKg">{{sucessObjectMessage.Amtlbs}}</span>
+                                                                    <ng-template
+                                                                        #capacityPerKg>{{sucessObjectMessage.Amtkg}}
+                                                                    </ng-template>
+                                                                </th>
+                                                                <th scope="col"
+                                                                    *ngIf="this.masterData?.controllerProductSettings?.Region?.toLowerCase()=='europe'"
+                                                                    class="delay font-14 table-header fw-normal text-center"
+                                                                    scope="col">
+                                                                    {{sucessObjectMessage.Delay}}</th>
+                                                                <th class="font-10 table-header fw-normal text-center"
+                                                                    scope="col">
+                                                                    <span
+                                                                        *ngIf="reviewData[0].Capacity.split(' ')[1].toLowerCase()==sucessObjectMessage.uomlb;else CapacityPerKg">{{sucessObjectMessage.DispensedAmtlbs}}</span>
+                                                                    <ng-template
+                                                                        #CapacityPerKg>{{sucessObjectMessage.DispensedAmtkg}}
+                                                                    </ng-template>
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody *ngFor="let signalItem of formulaSummary.SignalList">
+                                                            <tr>
+                                                                <td
+                                                                    [ngClass]="signalItem.isValid? 'text-center':'text-center red'">
+                                                                    {{signalItem.SignalNumber}}
+                                                                </td>
+                                                                <td
+                                                                    [ngClass]="signalItem.isValid? 'text-center':'text-center red'">
+                                                                    {{signalItem.ProductName}}
+                                                                    <img *ngIf="fetchIsLockFlagfromProduct(signalItem.ProductName)"
+                                                                        height="15px" width="15px"
+                                                                        src="/assets/images/Locked.svg">
+                                                                </td>
+                                                                <td
+                                                                    [ngClass]="signalItem.isValid? 'centeralign':'centeralign red'">
+                                                                    {{calproductamount(signalItem.ProductAmount)}}
+                                                                </td>
+                                                                <td [ngClass]="signalItem.isValid? 'centeralign':'centeralign red'"
+                                                                    *ngIf="this.masterData?.controllerProductSettings?.Region?.toLowerCase()=='europe'">
+                                                                    {{signalItem.ProductDelay}}
+                                                                </td>
+                                                                <td
+                                                                    [ngClass]="signalItem.isValid? 'text-center':'text-center red'">
+                                                                    {{calDispensedAmount(signalItem.ActualAmount,parentIndex)}}
+                                                                </td>
+                                                                <td class="text-end align-rit">
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+
+                                                    <!-- </div> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="row flex-wrap justify-content-between mt-4">
+    <button type="button" (click)="backToPerviousPage()"
+        class="defaultbtn btn-next btnback bg-white">{{sucessObjectMessage.back}}</button>
+    <button *ngIf="!isEditFlag" type="button" class=" defaultbtn btn-next w-auto" (click)="createConfiguration()">
+        {{sucessObjectMessage.CreateConfiguration}}</button>
+    <button *ngIf="isEditFlag" type="button" [disabled]="hasProductError || isLockedError "
+        class="defaultbtn btn-next w-auto" (click)="createConfiguration()">
+        {{sucessObjectMessage.UpdateConfiguration}}</button>
+
+</div>

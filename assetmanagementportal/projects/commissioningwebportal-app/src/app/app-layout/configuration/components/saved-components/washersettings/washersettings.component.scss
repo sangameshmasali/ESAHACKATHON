@@ -1,0 +1,76 @@
+.mat-icon {
+  font-size: 20px;
+  color: #0086E9;
+  position: absolute;
+  cursor: pointer;
+}
+
+.cap-pad {
+  padding-right: 7px;
+}
+
+  ::ng-deep .mat-tooltip {
+     background-color: whitesmoke;
+     color: black !important;
+    //  background-color: #0086E9;
+    //  color: white !important;
+     font-size: 14px;
+     white-space: pre-line !important;
+     max-width: 390px !important;
+     border:  1px solid gray !important;
+     border-radius:  3px !important;
+     padding:  10px !important; 
+     transform-origin: left center !important;
+    
+    &::after {
+      width: 0;
+      height: 0;
+      content: '';
+      position: absolute;
+      border-left: 0.5rem solid transparent;
+      border-right: 0.5rem solid transparent;
+      border-bottom: 0.5rem solid #9793938c;
+      //border-bottom: 0.5rem solid #0086E9;
+    }
+  
+    &.right {
+      overflow: initial;
+      margin-left: 1rem;
+      &:after {
+        left: -0.75rem;
+        top: calc(50% - 0.25rem);
+        transform: rotate(270deg);
+      }
+    }
+  }
+
+.font {
+  font-size: 15px;
+}
+
+@media screen and (max-width: 1023px) {
+  .justify-content-between {
+    justify-content: space-between !important;
+  }
+
+  .btn-combine {
+    display: flex;
+    width: unset;
+  }
+
+  .font {
+    font-size: 10px;
+  }
+
+  .card-header{
+    padding: 0.5rem 0.25rem;
+  }
+
+  .mx-3 {
+    margin-right: 0.25rem !important;
+  }
+
+  .col-md-6.col-sm-12.mobile-padding-bottom {
+    padding-bottom: 5px;
+  }
+}

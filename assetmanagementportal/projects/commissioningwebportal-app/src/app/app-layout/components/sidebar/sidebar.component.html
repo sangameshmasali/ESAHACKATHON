@@ -1,0 +1,48 @@
+<div class="left-nav pt-4 pl-s">
+  <nav class="sidebar">
+    <a (click)="navToWebPortal()" class="cursor-pointer logo d-flex align-items-center pb-4 border-bottom mb-4">
+      <div class="me-2 ms-4">
+        <img src="/assets/images/Logo.svg">
+      </div>
+      <div class="logo-text fw-bold">
+        <span class="fw-bold d-block">EQUIPMENT </span><span>SETUP APP</span>
+      </div>
+    </a>
+    <ul class="" id="accordiontoggle">
+      <li class="config-list common-style selected w-100" id="headingOne" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <div class="common-style w-100">
+          <i class="configration me-2"><img src="/assets/images/setting-config.svg"></i>
+          <span class="text-style font-15 blue fw-bold pt-1 font-ajuest">
+            CONFIGURATION
+          </span>
+          <i class="fa fa-angle-up blue font-20 float-end arrow-padding" aria-hidden="true"></i>
+        </div>
+      </li>
+      <ul id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordiontoggle">
+        <li class="config-list px-4 child-list" title="">
+          <a  (click)="navToWebPortal()" class="cursor-pointer common-style d-flex align-items-center ps-2 li-padding pl-0">
+            <i class="configration me-2"><img src="/assets/images/save-icon.svg"></i>
+            <span class="text-style font-15 blue fw-bold me-2 pt-1 ms-1 font-ajuest">
+              SAVED
+            </span>
+          </a>
+        </li>
+      </ul>
+    </ul>
+  </nav>
+  <ul class="account-nav w-100 ps-4 font-12 left-nav-col border-top pt-3 pb-4">
+    <span>ACCOUNT</span>
+    <li class="pt-4">
+      <a   class="cursor-pointer font-15 left-nav-col black-col">
+        <i class="saved me-2"><img src="/assets/images/Profile.svg"></i>
+        <span>Profile</span>
+      </a>
+    </li>
+    <li class="pt-4">
+      <a (click)="logOut()" class="font-15 left-nav-col black-col" href="#">
+        <i class="saved me-2"><img src="/assets/images/Logout.svg"></i>
+        <span>Logout</span>
+      </a>
+    </li>
+  </ul>
+</div>

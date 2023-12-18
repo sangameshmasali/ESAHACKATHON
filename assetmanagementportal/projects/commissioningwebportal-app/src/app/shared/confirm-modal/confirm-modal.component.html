@@ -1,0 +1,14 @@
+<div class="modal-body pt-4">
+  <h5 class="mat-body">{{overRideFormula}}</h5>
+  <p class="mat-body">{{messageText}}</p>
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <div class="text-center button-container d-flex justify-content-end">
+        <button type="button" class="defaultbtn btn-next btn-width w-auto mx-3 border-0"
+          (click)="activeModal.close(false)">{{cancelText}}</button>
+        <button type="button" class="defaultbtn btn-next btnback bg-white w-auto "
+          (click)="activeModal.close(true)">{{confirmText}}</button>
+      </div>
+    </div>
+  </div>
+</div>

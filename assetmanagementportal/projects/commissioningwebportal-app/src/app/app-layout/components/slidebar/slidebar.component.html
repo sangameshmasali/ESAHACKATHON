@@ -1,0 +1,102 @@
+
+<mat-toolbar color="white" *ngIf="sidenav.mode == 'over'">
+    <div class="me-2 ms-4 logo-mob" (click)="navToWebPortal()" >
+        <img src="/assets/images/Logo.svg">
+    </div>
+    <button  mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon  matListIcon class="iconmenu cust-toolbar">menu</mat-icon>
+      </button>
+</mat-toolbar>      
+<mat-sidenav-container class="full-height left-nav-custum" autosize="true">
+    <mat-sidenav #sidenav="matSidenav" opened (click)="toggleSidebar()">
+        <mat-list-item>
+            <div [ngClass]="[!collapse ? 'cust-container' : '']" class = "border-bottom pb-2 mb-4">
+                <button *ngIf="sidenav.mode == 'side'" mat-button class="menu-button">
+                    <mat-icon>menu</mat-icon>
+                  </button>
+                  <div  class="clearfix cursor-pointer logo d-flex align-items-center "
+                  (click)="$event.stopPropagation()" [ngClass]="[!collapse ? 'cust-display' : '']">
+                 
+                  <div *ngIf="hideMobile" class="me-2 ms-4" (click)="navToWebPortal()" >
+                      <img src="/assets/images/Logo.svg">
+                  </div>
+                  <div  class="logo-text fw-bold font-15" [hidden]="collapse"  (click)="navToWebPortal()">
+                      <span class=" d-block ">EQUIPMENT SETUP APP </span>
+                      <span></span>
+                  </div>
+              </div>
+            </div>
+
+            <!-- <div class="cursor-pointer expand-collapse"> <img matTooltip="Expand/Collapse"
+                    src='/assets/images/Menu.svg' /></div> -->
+
+        </mat-list-item>
+        <mat-list-item>
+             <!--<mat-list-item>
+                <div class="cursor-pointer logo d-flex align-items-center pb-2 border-bottom mb-4"
+                    (click)="$event.stopPropagation()">
+                    <div class="me-2 ms-4" (click)="navToWebPortal()">
+                        <img src="/assets/images/Logo.svg">
+                    </div>
+                    {{ collapse }}
+                    <div class="logo-text fw-bold font-15"  (click)="navToWebPortal()">
+                        <span class=" d-block ">EQUIPMENT </span>
+                        <span>SETUP APP</span>
+                    </div>
+                </div>
+            </mat-list-item>-->
+            <mat-list-item>
+                <div [ngClass]="[!collapse ? 'cust-display' : '']" class="list" (click)="$event.stopPropagation()" data-bs-toggle="collapse"
+                
+                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <img matTooltip="Configuration" class="configration me-2"
+                        src='/assets/images/setting-config.svg' />&nbsp;
+                    <span class="text-style font-15 blue fw-bold pt-1 font-ajuest"
+                        [hidden]="collapse">CONFIGURATION</span>
+                    <span  [hidden]="collapse">
+                        <i [ngClass]="[!collapse ? 'cust-margin' : '']" class="fa fa-angle-up blue font-20  arrow-padding" aria-hidden="true"></i></span>
+                </div>
+            </mat-list-item>
+            <mat-list-item>
+                <div  id="collapseOne" (click)="$event.stopPropagation()"
+                    class="cursor-pointer accordion-collapse collapse show" aria-labelledby="headingOne"
+                    data-bs-parent="#accordiontoggle">
+                    <div [ngClass]="[!collapse ? 'cust-display-config-list' : '']" (click)="navToWebPortal()" class="config-list">
+                        <img matTooltip="Saved" src='/assets/images/save-icon.svg' />&nbsp;
+                        <span [hidden]="collapse" [ngClass]="[!collapse ? 'cust-margin' : '']"
+                            class="text-style font-15 blue fw-bold me-2 pt-1 ms-1 font-ajuest">SAVED</span>
+                    </div>
+                </div>
+            </mat-list-item>
+        </mat-list-item>
+        <mat-list-item class="account-nav ">
+            <mat-list-item>
+                <div class=" logo d-flex align-items-center pb-4 border-bottom mb-4"></div>
+            </mat-list-item>
+            <mat-list-item>
+                <div class="account-list" [ngClass]="[!collapse ? 'cust-display-account' : '']">
+                    <span [hidden]="collapse" class="font-12 fw-bold">ACCOUNT</span>
+                </div>
+            </mat-list-item>
+            <mat-list-item>
+                <div [routerLink]="['/dashboard/configuration/profile'] " [ngClass]="[!collapse ? 'cust-display' : '']"
+                    class=" cursor-pointer account-list font-15 left-nav-col black-col pt-4"
+                    (click)="profileClick()">
+                    <img  [ngClass]="[!collapse ? 'cust-margin' : '']" matTooltip="Profile" src='/assets/images/Profile.svg' />&nbsp;
+                    <span [hidden]="collapse">Profile</span>
+                </div>
+            </mat-list-item>
+            <mat-list-item>
+                <div [ngClass]="[!collapse ? 'cust-display' : '']" (click)="logOut()" class="cursor-pointer account-list font-15 left-nav-col black-col pt-4">
+                    <img [ngClass]="[!collapse ? 'cust-margin' : '']" matTooltip="Logout" src='/assets/images/Logout.svg' />&nbsp;
+                    <span [hidden]="collapse">Logout</span>
+                </div>
+            </mat-list-item>
+
+        </mat-list-item>
+    </mat-sidenav>
+    <mat-sidenav-content class="padded">
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+
+</mat-sidenav-container>

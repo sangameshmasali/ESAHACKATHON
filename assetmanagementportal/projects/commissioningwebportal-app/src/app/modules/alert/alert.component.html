@@ -1,0 +1,4 @@
+<div *ngFor="let alert of alerts" class="{{ cssClass(alert) }} alert-dismissable d-flex">
+  <span [innerHTML]="alert.message"></span>
+  <a class="close float-end font-24" (click)="removeAlert(alert)">&times;</a>
+</div>

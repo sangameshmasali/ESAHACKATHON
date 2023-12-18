@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>CommissioningWebPortal</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<script charset='UTF-8'>
+    window['adrum-start-time'] = new Date().getTime();
+    (function(config) {
+        config.appKey = 'AD-AAB-AAX-FMC';
+        config.adrumExtUrlHttp = 'http://cdn.appdynamics.com';
+        config.adrumExtUrlHttps = 'https://cdn.appdynamics.com';
+        config.beaconUrlHttp = 'http://pdx-col.eum-appdynamics.com';
+        config.beaconUrlHttps = 'https://pdx-col.eum-appdynamics.com';
+        config.xd = {
+            enable: true
+        };
+        config.spa = {
+            "spa2": true
+        };
+        config.isZonePromise = true;
+    })(window['adrum-config'] || (window['adrum-config'] = {}));
+</script>
+<script src='//cdn.appdynamics.com/adrum/adrum-22.4.0.3721.js'></script>
+
+<body class="mat-typography">
+    <app-root>
+        <!-- <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div> -->
+    </app-root>
+    <app-redirect></app-redirect>
+</body>
+
+</html>

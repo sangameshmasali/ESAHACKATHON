@@ -1,0 +1,42 @@
+
+    .selected  {
+       
+        &.collapsed {
+            .arrow-padding {
+                -webkit-transform: rotate(180deg);
+                -moz-transform: rotate(180deg);
+                -ms-transform: rotate(180deg);
+                -o-transform: rotate(180deg);
+                transform: rotate(180deg);
+                margin-top: 3px;
+            }
+        }
+    }
+.sidebar {
+    min-height: 642px;
+    max-height: 100%;
+}
+.arrow-padding {
+    padding-top: 2px;
+}
+.li-padding {
+    padding: 12px 0;
+}
+
+
+// Responsive mobile code
+
+@media screen and (max-width: 767px) {
+    .sidebar {
+        min-height: auto;
+    }
+}
+
+
+@media screen and (min-width:1024px) and (max-width:1422px) {
+    .font-ajuest {
+        font-size: 12px;
+        margin-right: 10px;
+    }
+}
+

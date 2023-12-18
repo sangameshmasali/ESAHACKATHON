@@ -1,0 +1,34 @@
+
+<div class="modal-header card-header fw-bold font-15 pt-0 pb-0">
+    <div class="row mb-0">
+            <h4 class="mat-h4">{{ this.popupObjectMessage.headerReorderFormula}}</h4>
+            <label class="label fw-normal font-13">
+                {{ this.popupObjectMessage.subheaderReorderFormula }}
+            </label>
+        </div>
+    <button type="button" class="close font-24 border-0 blue bg-transparent pt-2" aria-label="Close"
+        (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="scrol-ele pt-1">
+    <div cdkDropList #formula="cdkDropList" [cdkDropListData]="formulaList" class="movie-list"
+        (cdkDropListDropped)="onDrop($event)">
+        <div class="movie-block font d-flex align-items-center justify-content-between" *ngFor="let formula of formulaList" cdkDrag>{{formula.FormulaNumber+'. '+
+            formula.ForumlaName}}
+            <span class="me-2"><img src="/assets/images/reordericon.png"></span>
+        </div>
+    </div>
+</div>
+<div class="modal-footer p-0">
+    <button class="defaultbtn btn-next btn-width w-auto mx-3" type="submit" [disabled]="disableBtn"
+        (click)="onApplyClick()" >Apply</button>
+</div>
+
+
+
+
+
+
+

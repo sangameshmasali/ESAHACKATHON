@@ -1,0 +1,123 @@
+// .left-nav {
+//     // background: #F7F7F7;
+//     // border-radius: 15px;
+//     // max-height: 100%;
+// }
+
+$black: #3E3E3C;
+$blue: #0086E9;
+
+.sidebar {
+    min-height: 642px;
+    max-height: 100%;
+}
+
+.logo-text {
+    color: $black;
+    line-height: 18px;
+}
+
+@media screen and (min-width:1024px) and (max-width:1422px) {
+    .font-ajuest {
+        font-size: 12px;
+        margin-right: 10px;
+    }
+}
+
+.full-height {
+    height: 100%;
+}
+
+.padded {
+    padding: 20px;
+}
+
+.with-icon {
+    display: flex;
+    align-items: center;
+}
+
+mat-sidenav-content.mat-drawer-content.mat-sidenav-content.padded {
+    background: white;
+}
+
+::ng-deep .mat-drawer-inner-container {
+    min-height: 642px;
+    height: 1% !important;
+    border-radius: 1px;
+    padding: 1px;
+    // padding-block-start: 10px;
+    background: #F7F7F7 !important;
+    padding: 10px 0px 40px 0px;
+}
+
+::ng-deep mat-sidenav-content.mat-drawer-content.mat-sidenav-content.padded[_ngcontent-lgy-c325] {
+    background: white;
+    min-height: 624px !important;
+    padding: 0px 15px 3px 30px !important;
+}
+
+::ng-deep mat-drawer-side {
+    width: 17%;
+    // overflow: hidden;
+    display: none;
+}
+
+::ng-deep .mat-drawer-content {
+    min-height: 624px !important;
+    padding: 2px 15px 2px 30px !important;
+
+}
+
+.account-nav {
+    bottom: -40%;
+}
+
+.list {
+    background: rgba(62, 62, 60, .1215686275);
+    padding: 12px 18px 12px 26px;
+    display: inline-block;
+}
+
+.config-list {
+    background: rgba(0, 134, 233, .0392156863);
+    border-left: 6px solid #0086E9;
+    padding: 12px 14px 12px 26px;
+}
+
+.account-list {
+    padding: 0px 0px 0px 24px;
+}
+
+.fa-angle-up:before {
+    content: "\f106";
+    padding: 0px 0px 0px 55px !important;
+}
+
+::ng-deep .mat-drawer {
+    overflow: hidden !important;
+}
+
+.expand-collapse {
+    text-align: left;
+    float: none;
+    padding: 0px 0px 12px 23px;
+} 
+
+.left-nav-custum {
+    .mat-icon {
+        height: 35px;   
+        width: 45px;
+        font-size: 35px;
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    .mat-drawer-content {
+        padding: 2px 15px 2px 16px !important;
+        overflow: hidden;
+    }
+    .logo-mob {
+        margin-left: 0 !important;
+    }
+}

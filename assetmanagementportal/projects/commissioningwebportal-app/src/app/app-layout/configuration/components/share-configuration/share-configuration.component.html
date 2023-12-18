@@ -1,0 +1,41 @@
+<div >
+    <div class="modal-content">
+        <div class="modal-header card-header fw-bold font-20 "  >
+            <h2 class="mat-h4" >{{ShareToUsers}}</h2>
+            <button type="button" class="close font-24 border-0 blue bg-transparent" aria-label="Close"
+                (click)="closeModel()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form class="form" id="shareform">
+            <div class="modal-body area-poup" >
+                <div class="form-layout w-100 m-0">
+                    <div class="row mb-3">
+                        <div class="left-margin-share">
+                            <div class="bottom-margin-share font-share">{{Name}}:  {{jsonData.id.split("_")[0]}}</div>
+                            <div><label for="Email" class="form-label font-share">{{EmailAddress}}</label> </div>
+                            <div>
+                                <textarea class="form-control w-auto" (keyup)="onKeyUp($event)" (paste)="onPaste($event)" [(ngModel)]="textAreaBind" name="Emails" id="emails" placeholder={{TextAreaPlaceHolder}} rows="8"
+                                cols="51" [ngModelOptions]="{standalone: true}"></textarea>
+                            </div>
+                           
+                            <div *ngIf="invalidEmailList.length>0" class="text-danger text-left top-margin-share">
+                                <span class="font-share">{{InvalidEmailId}}</span>
+                                <mat-chip-list>
+                                    <mat-chip style="margin-top: 10px;" *ngFor="let id of invalidEmailList; let i = index;" class="text-danger text-left">
+                                        {{id}}
+                                        <mat-icon matChipRemove (click)="removeEmailId(i,id)">&times;</mat-icon>
+                                    </mat-chip>
+                                </mat-chip-list>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="modal-footer">
+            <button class="defaultbtn btn-next btn-width w-auto" type="submit" value="Submit"
+                (click)="sendManyUserInvitation()" [disabled]="isSendInvitationDisabled">{{SendInvitation}}</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="saved-config">
+  <div class="page-tittle d-flex align-items-center">
+    <span class="font-24 me-3 responsive-size">SAVED CONFIGURATION</span>
+    <div class="cursor-pointer" (click)="addConfiguration()"><img src="/assets/images/Create.svg"></div>
+  </div>
+</div>
+<!--IF Configuratioin Data avaiable-->
+<div class="saved-congig-data table-responsive mt-4 ">
+  <table class="table table-odd-row-col ">
+    <thead>
+      <tr>
+        <th class="font-14 table-header fw-normal text-start" scope="col">Name</th>
+        <th class="font-14 table-header fw-normal text-start" scope="col">Controller</th>
+        <th class="font-14 table-header fw-normal text-start" scope="col">Created by</th>
+        <th class="font-14 table-header fw-normal text-start" scope="col">Last updated</th>
+        <th class="font-14 table-header fw-normal text-start ps-0" scope="col">Copy</th>
+        <th class="font-14 table-header fw-normal text-start ps-0" scope="col">Edit</th>
+        <th class="font-14 table-header fw-normal text-start ps-0" scope="col">Share</th>
+        <th class="font-14 table-header fw-normal text-start ps-0" scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of portalConfigData">
+          <td scope="row" style="min-width: 120px;"><a (click)="editConfigFiles(item,item.id)" class="breakword cursor-pointer blue text-decoration-underline">{{item.id.split("_")[0]}}</a>
+            <img *ngIf="item.SharedBy!=null" height="20px" width="20px" src="/assets/images/Shared.svg">
+          </td>
+        <td>{{item.id.split("_")[1]}}</td>
+        <td>
+          <span *ngIf="item.SharedBy!=null;else createdBy">{{item.SharedBy}}</span>
+          <ng-template #createdBy>{{item.email}}</ng-template>
+        </td>
+        <td>{{item._ts | date : "MMM d, y HH:mm:ss"}}</td>
+        <td><button [ngClass]="{'disbale-col': !disbaleBtn}" [disabled]="!disbaleBtn" class="border-0 back-none"><a><img
+                src="/assets/images/Copy.svg"></a></button></td>
+        <td><a class="cursor-pointer" (click)="editConfigFiles(item,item.id)"><img src="/assets/images/Edit.svg"></a>
+        </td>
+        <td><button (click)="ShareConfiguration(item)" class="border-0 back-none"><a><img
+                src="/assets/images/Share.svg"></a></button></td>
+        <td><a class="cursor-pointer" (click)="deleteConfigFiles(item.id)"><img
+              src="/assets/images/Delete-homepage.svg"></a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!-- No Configuratioin Data avaiable-->
+
+<!---- *ngIf="!!noConfig" -->
+<div class="no-Config-Data" *ngIf="!portalConfigData || noConfig">
+  <div class="row flex-column text-center mtop">
+    <div class="col">
+      <div><img src="/assets/images/Empty-Folder.svg"></div>
+    </div>
+    <div class="col mtoptext">
+      <p class="font-24 responsive-f-size">YOU’VE NOT ADDED ANY CONFIGURATION YET</p>
+      <div class="font-16 mb-3 mt-2">Would you like to add one?</div>
+      <button type="button" id="add-configuration" (click)="addConfiguration()" class="add-configuration defaultbtn">ADD
+        CONFIGURATION</button>
+    </div>
+  </div>
+</div>

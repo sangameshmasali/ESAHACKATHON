@@ -1,0 +1,19 @@
+::ng-deep .mat-body,
+.mat-body-1,
+.mat-typography .mat-body,
+.mat-typography .mat-body-1,
+.mat-typography {
+    font-size: initial !important;
+    font-family: Helvetica !important;
+    font-weight: 400 !important;
+}
+
+.modal-body {
+    padding: 25px 15px 25px 15px !important;
+}
+
+@media screen and (max-width: 1023px) {
+    .modal-body {
+        padding: 10px 15px 4px 15px !important;
+    }
+}

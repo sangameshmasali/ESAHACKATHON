@@ -1,0 +1,53 @@
+.mtop {
+    margin-top: 20px;
+}
+
+.mtoptext {
+    margin-top: 35px;
+}
+
+.d-done {
+    display: none;
+}
+
+.back-none {
+    background: none;
+}
+
+.disbale-col {
+    opacity: 0.30;
+}
+
+.breakword {
+    word-break: break-all;
+}
+
+.font-18 {
+    font-size: 19px;
+}
+
+.margin-left-14 {
+    margin-left: 14px;
+}
+
+@media screen and (min-width:1024px) and (max-width:1422px) {
+
+    .table>:not(:first-child),
+    .table>:not(caption)>*>* {
+        border: none;
+        font-size: 12px;
+        padding: 19.5px 11px;
+        text-align: left;
+    }
+
+}
+
+@media screen and (max-width: 1023px) {
+    .responsive-size {
+        font-size: 18px;
+        margin-top: 5px;
+    }
+    .responsive-f-size{
+        font-size: 16px;
+    }
+}

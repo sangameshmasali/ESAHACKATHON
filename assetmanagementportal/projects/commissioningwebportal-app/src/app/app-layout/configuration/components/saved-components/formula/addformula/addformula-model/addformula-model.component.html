@@ -1,0 +1,49 @@
+<form class="card form" [formGroup]="addFormulaForm" [ngClass]="{'formsubmitted': !!addFormulaForm['submitted']}">
+    <div class="modal-header card-header fw-bold font-15">
+        <h4 class="mat-h4">Add Formula</h4>
+        <button type="button" class="close font-24 border-0 blue bg-transparent" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body area-poup">
+       
+        <div class="form-layout w-100 m-0">
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="Name" class="form-label">Formula Type</label>
+                    <ng-select [clearable]="false" id="formulatype" (change)="onChangeFormulaType($event)"  [items]="formulaTypeList" formControlName="FormulaType"
+                        bindLabel="value" placeholder="Select value">
+                    </ng-select>
+                </div>
+                <div class="col">
+                    <label for="Name" class="form-label">Formula Number</label>
+                    <ng-select [clearable]="false" id="formulanumber" [items]="formulaNumberList" formControlName="FormulaNumber"
+                        bindLabel="value" placeholder="Select value">
+                        <ng-template ng-optgroup-tmp let-item="item" let-index="index">
+                        </ng-template>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col">
+                    <label for="Name" class="form-label">Formula Name</label>
+                    <ng-select *ngIf="showFormulaName" [clearable]="false" id="formulaname"  [items]="formulaNameList" formControlName="FormulaName"
+                        bindLabel="value" placeholder="Select value">
+                    </ng-select>
+                    <input *ngIf="!showFormulaName" allowAlphaNumeric maxlength="20" class="form-control w-100" id="formulanames" required formControlName="FormulaName" placeholder="Enter value" type="text"> 
+
+                    <div *ngIf="IsInvalid && FormulaName.invalid && (!!addFormulaForm['submitted'] || FormulaName.dirty || FormulaName.touched)"              
+                    class="text-danger text-left">
+                    <div *ngIf="FormulaName.errors?.['required']"></div>
+                </div> 
+                <div class="text-danger text-left" *ngIf="FormulaName.errors?.['pattern']"> Only space is not allowed </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="defaultbtn btn-next btnback bg-white w-auto mx-3"
+            (click)="activeModal.close(false)">Cancel</button>
+        <button class="defaultbtn btn-next btn-width w-auto" type="submit" (click)="modifyFormula()">Create</button>
+    </div>
+</form> 

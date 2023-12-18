@@ -1,0 +1,27 @@
+<svg id="Dashboard" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <rect id="Rectangle" width="23" height="23" transform="translate(0.5 0.5)" fill="#979797" stroke="#979797" stroke-width="1" opacity="0"/>
+  <g id="Dashboard-2" data-name="Dashboard" transform="translate(2.058 2.665)">
+    <path id="Shape" d="M0,.856A.857.857,0,0,1,.858,0H19.714a.852.852,0,0,1,.858.856V17.144a.857.857,0,0,1-.858.856H.858A.852.852,0,0,1,0,17.144Zm.857,0V17.143H19.714V.857Z" fill="#0086e9"/>
+    <path id="Path" d="M2.571,2.572H5.143v.857H2.571Z" fill="#0086e9"/>
+    <path id="Path-2" data-name="Path" d="M6,2.572h4.286v.857H6Z" fill="#0086e9"/>
+    <path id="Path-3" data-name="Path" d="M2.571,4.286H5.143v.857H2.571Z" fill="#0086e9"/>
+    <path id="Path-4" data-name="Path" d="M6,4.286h4.286v.857H6Z" fill="#0086e9"/>
+    <path id="Path-5" data-name="Path" d="M2.571,6H5.143v.857H2.571Z" fill="#0086e9"/>
+    <path id="Path-6" data-name="Path" d="M6,6h4.286v.857H6Z" fill="#0086e9"/>
+    <path id="Path-7" data-name="Path" d="M2.571,7.714H5.143v.857H2.571Z" fill="#0086e9"/>
+    <path id="Path-8" data-name="Path" d="M12.857,11.143h1.714V12H12.857Z" fill="#0086e9"/>
+    <path id="Path-9" data-name="Path" d="M12.857,12.857h1.714v.857H12.857Z" fill="#0086e9"/>
+    <path id="Path-10" data-name="Path" d="M12.857,14.571h1.714v.857H12.857Z" fill="#0086e9"/>
+    <path id="Path-11" data-name="Path" d="M15.429,11.143H18V12H15.429Z" fill="#0086e9"/>
+    <path id="Shape-2" data-name="Shape" d="M13.864,8.349A3,3,0,0,1,13,3.339l1.542,2.313Zm.832.207a3.046,3.046,0,0,0,.3.015,3,3,0,0,0,3-3,3.046,3.046,0,0,0-.015-.3l-2.631.658Zm-.986-5.694a3,3,0,0,1,4.068,1.573l-2.588.647Z" fill="#0086e9"/>
+    <path id="Shape-3" data-name="Shape" d="M0,.856A.857.857,0,0,1,.858,0H19.714a.852.852,0,0,1,.858.856V17.144a.857.857,0,0,1-.858.856H.858A.852.852,0,0,1,0,17.144Zm.857,0V17.143H19.714V.857Z" fill="#0086e9"/>
+    <path id="Path-12" data-name="Path" d="M15.429,12.857H18v.857H15.429Z" fill="#0086e9"/>
+    <path id="Path-13" data-name="Path" d="M15.429,14.571H18v.857H15.429Z" fill="#0086e9"/>
+    <path id="Path-14" data-name="Path" d="M2.571,10.286h.857v5.143H2.571Z" fill="#0086e9"/>
+    <path id="Path-15" data-name="Path" d="M4.286,13.714h.857v1.714H4.286Z" fill="#0086e9"/>
+    <path id="Path-16" data-name="Path" d="M6,12h.857v3.429H6Z" fill="#0086e9"/>
+    <path id="Path-17" data-name="Path" d="M7.714,12h.857v3.429H7.714Z" fill="#0086e9"/>
+    <path id="Path-18" data-name="Path" d="M9.429,12.857h.857v2.571H9.429Z" fill="#0086e9"/>
+    <path id="Path-19" data-name="Path" d="M6,7.714h4.286v.857H6Z" fill="#0086e9"/>
+  </g>
+</svg>
