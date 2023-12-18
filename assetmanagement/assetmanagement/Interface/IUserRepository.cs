@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
+using assetmanagement.Model;
 
 namespace assetmanagement.Interface
 {
     public interface IUserRepository 
     {
-
-        Task<string> GetUserDetailsFromDb(string conn);
+        Task<Employee> GetUserDetailsFromDb(string connestionString);
     }
 }

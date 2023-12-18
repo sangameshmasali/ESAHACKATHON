@@ -3,32 +3,37 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 using assetmanagement.Interface;
+using assetmanagement.Model;
 using Newtonsoft.Json;
 
 namespace assetmanagement.Repository
 {
     public class UserRepository : IUserRepository
     {
-        public async Task<string> GetUserDetailsFromDb(string connestionString)
+        public async Task<Employee> GetUserDetailsFromDb(string connestionString)
         {
             try
             {
                 DataTable objResult = new DataTable();
                 SqlDataReader myReader;
+                Employee employee = new Employee();
                 using (SqlConnection conn = new SqlConnection(connestionString))
                 {
                     await conn.OpenAsync();
-                    using (SqlCommand command = new SqlCommand("SELECT * FROM Employee", conn))
+                    SqlCommand command = new SqlCommand("SELECT * FROM Employee", conn);
+
+                    using (SqlDataReader oReader = command.ExecuteReader())
                     {
-                        myReader = command.ExecuteReader();
-                        objResult.Load(myReader);
-                        //SqlDataAdapter da = new SqlDataAdapter(command);
-                        //da.Fill(dt);
+                        while (oReader.Read())
+                        {
+                            employee.EmployeeId = oReader["EmployeeID"].ToString();
+                            employee.Email = oReader["Email"].ToString();
+                        }
+
                         conn.Close();
-                        dynamic jsonResponse = JsonConvert.SerializeObject(objResult);
-                        return jsonResponse;
                     }
                 }
+                return employee;
             }
 
             catch (Exception ex)
@@ -36,6 +41,6 @@ namespace assetmanagement.Repository
                 throw ex;
             }
         }
-        
+
     }
 }
