@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel.Channels;
 using System.Threading.Tasks;
 using assetmanagement.Interface;
 using assetmanagement.Model;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.PowerShell.Commands;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace assetmanagement.Controllers
 {
-    //[Route("api/[controller]")]
     public class UserController : Controller
     {
         private IConfiguration _configuration { get; }
@@ -25,45 +28,69 @@ namespace assetmanagement.Controllers
 
 
 
+        [Authorize]
         [HttpGet]
-        [Route("api/GetUserDetails")]
-        public async Task<Employee> GetUserDetails()
+        [Route("api/getUserDetails")]
+        public async Task<IActionResult> GetUserDetails()
         {
-            var v = _configuration.GetValue<string>("ConnectionStrings");
-            var employee = _userRepository.GetUserDetailsFromDb(_configuration.GetValue<string>("ConnectionStrings"));
-            return employee.Result;
+            try
+            {
+                var employees = _userRepository.GetUserDetailsFromDb("Server=tcp:serv-test100.database.windows.net,1433;Initial Catalog=AMSDB;Persist Security Info=False;User ID=saadmin;Password=P@ssw0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=60;");
+                return Ok(employees.Result);
+            }
+            catch (Exception ex)
+            {
+                var message = "Error while fetching data, Check Database connection";
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/values
+        //[Authorize]
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("api/addUser")]
+        public async Task<IActionResult> AddUser([FromBody] Employee employee )
         {
+            try
+            {
+                var userAdded = _userRepository.AddUserToDb("Server=tcp:serv-test100.database.windows.net,1433;Initial Catalog=AMSDB;Persist Security Info=False;User ID=saadmin;Password=P@ssw0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=60;", employee);
+                if (userAdded.Result)
+                    return Ok("User created successfully");
+                else
+                {
+                    var message = "This user is already existing";
+                    return StatusCode(StatusCodes.Status400BadRequest, message);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                var message = "Error while fetching data, Check Database connection";
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        //[Authorize]
+        [HttpPost]
+        [Route("api/deleteUser")]
+        public async Task<IActionResult> DeleteUser([FromBody] Employee employee)
         {
-        }
+            try
+            {
+                var userAdded = _userRepository.DeleteUserToDb("Server=tcp:serv-test100.database.windows.net,1433;Initial Catalog=AMSDB;Persist Security Info=False;User ID=saadmin;Password=P@ssw0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=60;", employee);
+                if (userAdded.Result)
+                    return Ok("User deleted successfully");
+                else
+                {
+                    var message = "Error while fetching data, Check Database connection";
+                    return StatusCode(StatusCodes.Status500InternalServerError, message);
+                }
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-
-        [HttpGet]
-        [Route("api/GetUser")]
-        public string GetUser()
-        {
-            return "Abhishek";
+            }
+            catch (Exception ex)
+            {
+                var message = "Error while fetching data, Check Database connection";
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
         }
     }
 }
