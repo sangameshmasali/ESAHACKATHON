@@ -17,11 +17,11 @@
                   <div  class="clearfix cursor-pointer logo d-flex align-items-center "
                   (click)="$event.stopPropagation()" [ngClass]="[!collapse ? 'cust-display' : '']">
                  
-                  <div *ngIf="hideMobile" class="me-2 ms-4" (click)="navToWebPortal()" >
+                  <!-- <div *ngIf="hideMobile" class="me-2 ms-4" (click)="navToWebPortal()" >
                       <img src="/assets/images/Logo.svg">
-                  </div>
-                  <div  class="logo-text fw-bold font-15" [hidden]="collapse"  (click)="navToWebPortal()">
-                      <span class=" d-block ">EQUIPMENT SETUP APP </span>
+                  </div> -->
+                  <div  class="logo-text fw-bold font-15 pl-2" [hidden]="collapse"  (click)="navToWebPortal()">
+                      <span class=" d-block alter-heading">ASSET MANAGEMENT SYSTEM </span>
                       <span></span>
                   </div>
               </div>
@@ -45,7 +45,7 @@
                     </div>
                 </div>
             </mat-list-item>-->
-            <mat-list-item>
+            <!-- <mat-list-item>
                 <div [ngClass]="[!collapse ? 'cust-display' : '']" class="list" (click)="$event.stopPropagation()" data-bs-toggle="collapse"
                 
                     data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -56,7 +56,7 @@
                     <span  [hidden]="collapse">
                         <i [ngClass]="[!collapse ? 'cust-margin' : '']" class="fa fa-angle-up blue font-20  arrow-padding" aria-hidden="true"></i></span>
                 </div>
-            </mat-list-item>
+            </mat-list-item> -->
             <mat-list-item>
                 <div  id="collapseOne" (click)="$event.stopPropagation()"
                     class="cursor-pointer accordion-collapse collapse show" aria-labelledby="headingOne"
@@ -64,7 +64,29 @@
                     <div [ngClass]="[!collapse ? 'cust-display-config-list' : '']" (click)="navToWebPortal()" class="config-list">
                         <img matTooltip="Saved" src='/assets/images/save-icon.svg' />&nbsp;
                         <span [hidden]="collapse" [ngClass]="[!collapse ? 'cust-margin' : '']"
-                            class="text-style font-15 blue fw-bold me-2 pt-1 ms-1 font-ajuest">SAVED</span>
+                            class="text-style font-15 blue fw-bold me-2 pt-1 ms-1 font-ajuest">Assets</span>
+                    </div>
+                </div>
+            </mat-list-item>
+            <mat-list-item>
+                <div  id="collapseOne" (click)="$event.stopPropagation()"
+                    class="cursor-pointer accordion-collapse collapse show" aria-labelledby="headingOne"
+                    data-bs-parent="#accordiontoggle">
+                    <div [ngClass]="[!collapse ? 'cust-display-config-list' : '']" (click)="navtoUseScreen()" class="config-list">
+                        <img matTooltip="Saved" src='/assets/images/Profile.svg' />&nbsp;
+                        <span [hidden]="collapse" [ngClass]="[!collapse ? 'cust-margin' : '']"
+                            class="text-style font-15 blue fw-bold me-2 pt-1 ms-1 font-ajuest">Users</span>
+                    </div>
+                </div>
+            </mat-list-item>
+            <mat-list-item>
+                <div  id="collapseOne" (click)="$event.stopPropagation()"
+                    class="cursor-pointer accordion-collapse collapse show" aria-labelledby="headingOne"
+                    data-bs-parent="#accordiontoggle">
+                    <div [ngClass]="[!collapse ? 'cust-display-config-list' : '']" (click)="navRequestsScreen()" class="config-list">
+                        <img matTooltip="Saved" src='/assets/images/save-icon.svg' />&nbsp;
+                        <span [hidden]="collapse" [ngClass]="[!collapse ? 'cust-margin' : '']"
+                            class="text-style font-15 blue fw-bold me-2 pt-1 ms-1 font-ajuest">Requests</span>
                     </div>
                 </div>
             </mat-list-item>

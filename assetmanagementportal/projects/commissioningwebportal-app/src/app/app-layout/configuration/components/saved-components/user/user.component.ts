@@ -1,9 +1,9 @@
+import { NgbActiveModal, NgbModal,NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { userProfile } from 'projects/commissioningwebportal-app/src/app/models/user';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgbActiveModal, NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { userProfile } from 'projects/commissioningwebportal-app/src/app/models/user';
 import { AlertService } from 'projects/commissioningwebportal-app/src/app/modules/alert/alert.service';
 import { ConfirmModalComponent } from 'projects/commissioningwebportal-app/src/app/shared/confirm-modal/confirm-modal.component';
 import { LoggerService } from '../../../../core';
@@ -11,14 +11,14 @@ import { GenericConfigurationService } from '../../../services/generic-configura
 import { ShareConfigurationModelComponent } from '../../share-configuration/share-configuration.component';
 import { flagService } from '../../../services/flag-service';
 import { CreateassetComponent } from '../createasset/createasset.component';
+import { AdduserComponent } from '../adduser/adduser.component';
 
 @Component({
-  selector: 'app-saved-configuration',
-  templateUrl: './saved-configuration.component.html',
-  styleUrls: ['./saved-configuration.component.scss']
+  selector: 'app-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.scss']
 })
-export class SavedConfigurationComponent implements OnInit {
-
+export class UserComponent implements OnInit {
   portalConfigData: any;
   noConfig: boolean = false;
   userData: userProfile;
@@ -147,10 +147,10 @@ export class SavedConfigurationComponent implements OnInit {
 
   }
 
-  addAsset() {
-    const modalRef = this.modalService.open(CreateassetComponent, { size: '564' });
+  addUser() {
+    const modalRef = this.modalService.open(AdduserComponent, { size: '564' });
     //modalRef.componentInstance.index = i;
-    modalRef.componentInstance.assetHeader = "Asset Request";
+    modalRef.componentInstance.assetHeader = "Add New User";
     //modalRef.componentInstance.selectedController = this.selectedController;
     const promise = modalRef.result.then(
       res => {
