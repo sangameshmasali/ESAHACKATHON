@@ -5,12 +5,11 @@ import { GenericConfigurationService } from '../../../services/generic-configura
 import { ConfirmModalComponent } from 'projects/commissioningwebportal-app/src/app/shared/confirm-modal/confirm-modal.component';
 
 @Component({
-  selector: 'app-createasset',
-  templateUrl: './createasset.component.html',
-  styleUrls: ['./createasset.component.scss']
+  selector: 'app-assetrequestmodel',
+  templateUrl: './assetrequestmodel.component.html',
+  styleUrls: ['./assetrequestmodel.component.scss']
 })
-export class CreateassetComponent implements OnInit {
-
+export class AssetrequestmodelComponent implements OnInit {
   addFormulaForm!: FormGroup;
   formulaTypeList: any[];
   formulaNumberList: any[];
@@ -32,7 +31,7 @@ export class CreateassetComponent implements OnInit {
 
   constructor(public activeModal: NgbActiveModal, private modalService: NgbModal,
     private fb: FormBuilder, private genericConfigurationService: GenericConfigurationService) {
-    this.defalutLeninTypeData = null;
+    this.defalutLeninTypeData = null;//this.genericConfigurationService.defaultFourmulaData(this.selectedController).DefaultFormulasLeninType.DefaultFormulas;
     this.formulaNameList = this.leninTypeFormulaList();
   }
 
@@ -42,7 +41,13 @@ export class CreateassetComponent implements OnInit {
     this.initializeForm();
   }
   initializeForm() {
-   
+ 
+    this.addFormulaForm = this.fb.group({
+      FormulaType: new FormControl(this.formulaTypeList[0].value, Validators.required),
+      FormulaNumber: new FormControl(this.formulaNumberList[0], Validators.required),
+      FormulaName: new FormControl(this.formulaNameList, [Validators.required])
+    });
+    this.onChangeFormulaType(this.FormulaType);
   }
   onChangeFormulaType($event) {
     // set null formulaname value whenever change happen
@@ -114,4 +119,5 @@ export class CreateassetComponent implements OnInit {
       event.preventDefault();
     }
   }
+
 }

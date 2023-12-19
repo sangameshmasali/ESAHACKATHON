@@ -62,22 +62,7 @@ export class AssetrequestComponent implements OnInit {
     this.loggerService.getUserDetails().subscribe(res => {
       if (res) {
         userEmail = res.mail;
-        this.genericConfigurationService.getPortalConfigFiles(userEmail).subscribe(res => {
-          if (res.length > 0) {
-            this.portalConfigData = res;
-            this.portalConfigData = this.converdDateFormat(this.portalConfigData);
-            this.noConfig = false;
-            this.spinner.hide();
-          }
-          else {
-            this.noConfig = true;
-            this.spinner.hide();
-          }
-        },
-          (err: any) => {
-            this.noConfig = true;
-            this.spinner.hide();
-          });
+   
       }
     });
 

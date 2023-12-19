@@ -30,6 +30,7 @@ export class ShareConfigurationModelComponent implements OnInit {
     SendInvitation:string;
     InvalidEmailId:string;
     TextAreaPlaceHolder:string;
+    
 
     popupObjectMessage: any = {};
     isSendInvitationDisabled: boolean = true;

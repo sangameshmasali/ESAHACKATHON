@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { ConfigurationRoutingModule } from './configuration-routing.module';
 import { SavedConfigurationComponent } from './components/saved-components/saved-configuration/saved-configuration.component';
-import { WashersettingsComponent } from './components/saved-components/washersettings/washersettings.component';
 import { HeaderComponent } from '../../shared/components/header/header.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,10 +21,11 @@ import { CreateassetComponent } from './components/saved-components/createasset/
 import { UserComponent } from './components/saved-components/user/user.component';
 import { AdduserComponent } from './components/saved-components/adduser/adduser.component';
 import { AssetrequestComponent } from './components/saved-components/assetrequest/assetrequest.component';
+import { AssetrequestmodelComponent } from './components/saved-components/assetrequestmodel/assetrequestmodel.component';
+import { AssethistoryComponent } from './components/saved-components/assethistory/assethistory.component';
 
 @NgModule({
   declarations: [
-    WashersettingsComponent,
     SavedConfigurationComponent,
     HeaderComponent,
     ProfileComponent,
@@ -33,7 +33,9 @@ import { AssetrequestComponent } from './components/saved-components/assetreques
     CreateassetComponent,
     UserComponent,
     AdduserComponent,
-    AssetrequestComponent
+    AssetrequestComponent,
+    AssetrequestmodelComponent,
+    AssethistoryComponent
   ],
   providers: [
     NgbActiveModal,

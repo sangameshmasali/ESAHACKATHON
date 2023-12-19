@@ -31,7 +31,7 @@ export class AdduserComponent implements OnInit {
 
   constructor(public activeModal: NgbActiveModal, private modalService: NgbModal,
     private fb: FormBuilder, private genericConfigurationService: GenericConfigurationService) {
-    this.defalutLeninTypeData = this.genericConfigurationService.defaultFourmulaData(this.selectedController).DefaultFormulasLeninType.DefaultFormulas;
+    this.defalutLeninTypeData = null;//this.genericConfigurationService.defaultFourmulaData(this.selectedController).DefaultFormulasLeninType.DefaultFormulas;
     this.formulaNameList = this.leninTypeFormulaList();
   }
 
@@ -41,10 +41,7 @@ export class AdduserComponent implements OnInit {
     this.initializeForm();
   }
   initializeForm() {
-    this.defalutLeninTypeData = this.genericConfigurationService.defaultFourmulaData(this.selectedController).DefaultFormulasLeninType.DefaultFormulas;
-    this.formulaNameList = this.leninTypeFormulaList();
-    this.formulaTypeList = this.genericConfigurationService.formulaType();
-    this.formulaNumberList = this.genericConfigurationService.formulaNumber();
+   
     this.addFormulaForm = this.fb.group({
       FormulaType: new FormControl(this.formulaTypeList[0].value, Validators.required),
       FormulaNumber: new FormControl(this.formulaNumberList[0], Validators.required),

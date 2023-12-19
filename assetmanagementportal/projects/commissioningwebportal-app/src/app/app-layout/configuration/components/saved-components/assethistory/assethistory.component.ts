@@ -14,11 +14,11 @@ import { CreateassetComponent } from '../createasset/createasset.component';
 import { AssetrequestmodelComponent } from '../assetrequestmodel/assetrequestmodel.component';
 
 @Component({
-  selector: 'app-saved-configuration',
-  templateUrl: './saved-configuration.component.html',
-  styleUrls: ['./saved-configuration.component.scss']
+  selector: 'app-assethistory',
+  templateUrl: './assethistory.component.html',
+  styleUrls: ['./assethistory.component.scss']
 })
-export class SavedConfigurationComponent implements OnInit {
+export class AssethistoryComponent implements OnInit {
 
   portalConfigData: any;
   noConfig: boolean = false;
@@ -27,15 +27,26 @@ export class SavedConfigurationComponent implements OnInit {
   isEditFlag: boolean = false;
   popupObjectMessage: any = {};
   dateAndTime: any;
+  masterData$:any=null;
+  masterData:any={};
 
 
   constructor(private router: Router, public activeModal: NgbActiveModal, private modalService: NgbModal, private genericConfigurationService: GenericConfigurationService, private translate: TranslateService,
     private spinner: NgxSpinnerService, private alert: AlertService, private loggerService: LoggerService,
-    private flagService: flagService) { }
+    private flagService: flagService) { 
+      this.masterData$ = this.genericConfigurationService.masterData.subscribe(data => {
+        if (data) {
+          this.masterData = data;
+        }
+      });
+    }
 
 
   ngOnInit(): void {
     this.getPortalConfigFiles();
+    this.translate.setDefaultLang('en-US');
+    this.getTranslation();
+
   }
 
 
@@ -59,7 +70,7 @@ export class SavedConfigurationComponent implements OnInit {
     this.loggerService.getUserDetails().subscribe(res => {
       if (res) {
         userEmail = res.mail;
-    
+
       }
     });
 
@@ -100,16 +111,34 @@ export class SavedConfigurationComponent implements OnInit {
     });
   }
 
-  fetchAssetHistory(asset, assetId) {
-    this.genericConfigurationService.getAssetHostory(assetId).subscribe(res => {
-      if (res) {
-        this.genericConfigurationService.masterData.value.AssetHistory = res.body;
-      }
-    },(err: any) => {
-      this.noConfig = true;
-      this.spinner.hide();
-    });
-      this.router.navigate([this.genericConfigurationService.routePath.concat('/assethistory')]);
+  editConfigFiles(getEditData, passingisEditId) {
+    let editConfigObj = this.genericConfigurationService.editConfigJson(getEditData);
+    this.genericConfigurationService.masterData.value.configurationDetails = editConfigObj.configurationDetails;
+    this.genericConfigurationService.masterData.value.controllerProductSettings = editConfigObj.controllerProductSettings;
+    if (editConfigObj.configurationDetails?.ControllerApplication?.value?.toLocaleLowerCase() === 'ab300'){
+      this.genericConfigurationService.masterData.value.watersettings = editConfigObj.watersettings;
+      this.genericConfigurationService.masterData.value.washersettings = editConfigObj.washersettings;
+    }
+    else{
+      this.genericConfigurationService.masterData.value.washersettings = editConfigObj.washersettings;
+      this.genericConfigurationService.masterData.value.watersettings = editConfigObj.watersettings;
+    }
+    this.genericConfigurationService.masterData.value.formula = editConfigObj.formula;
+    this.genericConfigurationService.masterData.value.isEditFlag = true;
+    this.genericConfigurationService.masterData.value.storePreviousConfigId = passingisEditId;
+    this.genericConfigurationService.masterData.value.OneditStoreSelectedData = editConfigObj;
+    this.genericConfigurationService.masterData.value.oNeditStoreSelectedRegion = editConfigObj.controllerProductSettings.Region;
+    this.genericConfigurationService.setLocalStorage(this.genericConfigurationService.masterData.value);
+    this.genericConfigurationService.masterData.value.isWasherEdited = false;
+    this.genericConfigurationService.masterData.value.editedWasherindex = 0;
+    this.genericConfigurationService.masterData.value.hideWasherContent = [];
+    this.genericConfigurationService.masterData.value.hasProductError = false;
+    this.flagService.updateNumero("NO FLAG");
+    if (editConfigObj.configurationDetails?.ControllerApplication?.value?.toLocaleLowerCase() === 'ab300')
+      this.router.navigate([this.genericConfigurationService.routePath.concat('/ab300-reviewandfinalise')]);
+    else
+      this.router.navigate([this.genericConfigurationService.routePath.concat('/reviewfinalise')]);
+
   }
 
   addAsset() {
