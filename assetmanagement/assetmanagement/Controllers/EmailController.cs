@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace assetmanagement.Controllers
 {
-    [Route("api/[controller]")]
+    //[Route("api/[controller]")]
     public class EmailController : Controller
     {
         IEmailService _emailService = null;

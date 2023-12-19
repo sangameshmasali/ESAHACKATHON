@@ -2,45 +2,88 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using assetmanagement.Interface;
+using assetmanagement.Model;
+using assetmanagement.Repository;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace assetmanagement.Controllers
 {
-    [Route("api/[controller]")]
     public class AssetController : Controller
     {
-        // GET: api/values
+        private IAssetRepository _assetRepository { get; }
+        public AssetController(IAssetRepository assetRepository)
+        {
+            _assetRepository = assetRepository;
+        }
+
+        //[Authorize]
         [HttpGet]
-        public IEnumerable<string> Get()
+        [Route("api/getAssetDetails")]
+        public async Task<IActionResult> GetAssetDetails()
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                var assets = _assetRepository.GetAssetDetailsFromDb("Server=tcp:serv-test100.database.windows.net,1433;Initial Catalog=AMSDB;Persist Security Info=False;User ID=saadmin;Password=P@ssw0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=60;");
+                return Ok(assets.Result);
+            }
+            catch (Exception ex)
+            {
+                var message = "Error while fetching data, Check Database connection";
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/values
+        //[Authorize]
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Route("api/addDevice")]
+        public async Task<IActionResult> AddDevice([FromBody] Asset asset)
         {
+            try
+            {
+                var userAdded = _assetRepository.AddAssetToDb("Server=tcp:serv-test100.database.windows.net,1433;Initial Catalog=AMSDB;Persist Security Info=False;User ID=saadmin;Password=P@ssw0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=60;", asset);
+                if (userAdded.Result)
+                    return Ok("Device created successfully");
+                else
+                {
+                    var message = "This device is already existing";
+                    return StatusCode(StatusCodes.Status500InternalServerError, message);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                var message = "Error while fetching data, Check Database connection";
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        //[Authorize]
+        [HttpPost]
+        [Route("api/deleteDevice")]
+        public async Task<IActionResult> DeleteDevice([FromBody] Asset asset)
         {
-        }
+            try
+            {
+                var userAdded = _assetRepository.DeleteAssetToDb("Server=tcp:serv-test100.database.windows.net,1433;Initial Catalog=AMSDB;Persist Security Info=False;User ID=saadmin;Password=P@ssw0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=60;", asset);
+                if (userAdded.Result)
+                    return Ok("Device deleted successfully");
+                else
+                {
+                    var message = "Error while fetching data, Check Database connection";
+                    return StatusCode(StatusCodes.Status500InternalServerError, message);
+                }
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            }
+            catch (Exception ex)
+            {
+                var message = "Error while fetching data, Check Database connection";
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
         }
     }
 }
