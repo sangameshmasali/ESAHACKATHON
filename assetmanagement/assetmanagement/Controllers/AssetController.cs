@@ -34,7 +34,7 @@ namespace assetmanagement.Controllers
             catch (Exception ex)
             {
                 var message = "Error while fetching data, Check Database connection";
-                return StatusCode(StatusCodes.Status500InternalServerError, message);
+                return StatusCode(StatusCodes.Status500InternalServerError, message + ex);
             }
         }
 
@@ -75,6 +75,30 @@ namespace assetmanagement.Controllers
                 else
                 {
                     var message = "Error while fetching data, Check Database connection";
+                    return StatusCode(StatusCodes.Status500InternalServerError, message);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                var message = "Error while fetching data, Check Database connection";
+                return StatusCode(StatusCodes.Status500InternalServerError, message);
+            }
+        }
+
+        //[Authorize]
+        [HttpPost]
+        [Route("api/assetRequest")]
+        public async Task<IActionResult> AssetRequest([FromBody] AssetRequest asset)
+        {
+            try
+            {
+                var userAdded = _assetRepository.AssetRequestToDb("Server=tcp:serv-test100.database.windows.net,1433;Initial Catalog=AMSDB;Persist Security Info=False;User ID=saadmin;Password=P@ssw0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=60;", asset);
+                if (userAdded.Result)
+                    return Ok("Device requested Successfully");
+                else
+                {
+                    var message = "This device is already assigned/requested by other employee";
                     return StatusCode(StatusCodes.Status500InternalServerError, message);
                 }
 

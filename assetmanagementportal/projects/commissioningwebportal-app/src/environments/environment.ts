@@ -7,7 +7,7 @@ export const environment = {
   env: 'local',
 
   // api path config
-  baseCommissoioningwebApi: 'https://commissioningwebservicestest.azurewebsites.net/',
+  baseCommissoioningwebApi: 'https://localhost:44392/',//'https://commissioningwebservicestest.azurewebsites.net/',
   appRedirectUri:'http://localhost:4200',
 
 };

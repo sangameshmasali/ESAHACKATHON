@@ -28,15 +28,24 @@ namespace assetmanagement.Controllers
 
 
 
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         [Route("api/getUserDetails")]
-        public async Task<IActionResult> GetUserDetails()
+        public async Task<IActionResult> GetUserDetails(string Email="")
         {
             try
             {
-                var employees = _userRepository.GetUserDetailsFromDb("Server=tcp:serv-test100.database.windows.net,1433;Initial Catalog=AMSDB;Persist Security Info=False;User ID=saadmin;Password=P@ssw0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=60;");
-                return Ok(employees.Result);
+                if(!string.IsNullOrEmpty(Email))
+                {
+                    var employees = _userRepository.GetUserDetailsFromDb("Server=tcp:serv-test100.database.windows.net,1433;Initial Catalog=AMSDB;Persist Security Info=False;User ID=saadmin;Password=P@ssw0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=60;",Email);
+                    return Ok(employees.Result);
+                }
+                else
+                {
+                    var employees = _userRepository.GetUserDetailsFromDb("Server=tcp:serv-test100.database.windows.net,1433;Initial Catalog=AMSDB;Persist Security Info=False;User ID=saadmin;Password=P@ssw0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=60;","");
+                    return Ok(employees.Result);
+                }
+                
             }
             catch (Exception ex)
             {

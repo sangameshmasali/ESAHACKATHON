@@ -19,13 +19,13 @@ import { AdduserComponent } from '../adduser/adduser.component';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
-  portalConfigData: any;
   noConfig: boolean = false;
   userData: userProfile;
   disbaleBtn: boolean = false;
   isEditFlag: boolean = false;
   popupObjectMessage: any = {};
   dateAndTime: any;
+  userList:any;
 
 
   constructor(private router: Router, public activeModal: NgbActiveModal, private modalService: NgbModal, private genericConfigurationService: GenericConfigurationService, private translate: TranslateService,
@@ -34,7 +34,7 @@ export class UserComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getPortalConfigFiles();
+    this.getUserList();
     this.translate.setDefaultLang('en-US');
     this.getTranslation();
 
@@ -55,19 +55,20 @@ export class UserComponent implements OnInit {
     return data;
   }
 
-  getPortalConfigFiles() {
+  getUserList() {
     this.spinner.show();
-    let userEmail = '';
-    this.loggerService.getUserDetails().subscribe(res => {
-
-    });
-
-
+    this.genericConfigurationService.getUserDetails("").subscribe(user => {
+      if(user){
+        this.userList = user;
+      }
+      this.spinner.hide();
+    })
+    this.spinner.hide();
   }
 
   // Delete the config file
 
-  deleteConfigFiles(getConfigId) {
+  deleteConfigFiles(userId) {
     const modalRef = this.modalService.open(ConfirmModalComponent, { size: 'sm', windowClass: 'el-confirm-modal' });
     modalRef.componentInstance.messageText = "Are you sure you want to delete this configuration?";
     modalRef.componentInstance.confirmText = this.popupObjectMessage.confirmWithYes;
@@ -75,15 +76,13 @@ export class UserComponent implements OnInit {
     modalRef.result.then(res => {
       if (res) {
         this.spinner.show();
-        let reqData: any = {
-          Id: getConfigId
-        };
-        let body = { body: reqData };
-        this.genericConfigurationService.deleteUpsertConfigFile(body).subscribe((res) => {
+        let reqData: any = userId;
+        //let body = { body: reqData };
+        this.genericConfigurationService.deleteUser(reqData).subscribe((res) => {
           if (res) {
-            this.portalConfigData = this.portalConfigData.filter(o => o.id !== getConfigId);
-            this.alert.success(res, this.genericConfigurationService.setTimeOutValue, true);
-            if (this.portalConfigData.length == 0) {
+            this.getUserList();
+            this.alert.success(res.body, this.genericConfigurationService.setTimeOutValue, true);
+            if (this.userList.length == 0) {
               this.noConfig = true;
             }
             this.spinner.hide();
@@ -136,8 +135,7 @@ export class UserComponent implements OnInit {
     //modalRef.componentInstance.selectedController = this.selectedController;
     const promise = modalRef.result.then(
       res => {
-        if (res) {
-        }
+        this.getUserList();
       },
       dismiss => { }
     );
@@ -177,7 +175,7 @@ export class UserComponent implements OnInit {
     const promise = modalRef.result.then(
       res => {
         if (res) {
-          this.getPortalConfigFiles();
+          //this.getPortalConfigFiles();
         }
       },
       dismiss => { }

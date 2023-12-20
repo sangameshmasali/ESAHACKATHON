@@ -6,7 +6,7 @@
       <button class="btn btn-primary" (click)="assetRequest()"> Asset Request</button>
     </div>
     <div class="align-right ">
-      <button class="btn btn-primary" (click)="addAsset()"> Create New Asset</button>
+      <button class="btn btn-primary" (click)="addAsset()" *ngIf="true"> Create New Asset</button>
     </div>
     <!-- <div class="cursor-pointer" (click)="addConfiguration()"><img src="/assets/images/Create.svg"></div> -->
   </div>
@@ -25,18 +25,17 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of portalConfigData">
-          <td scope="row" style="min-width: 120px;"><a (click)="fetchAssetHistory(item,item.id)" class="breakword cursor-pointer blue text-decoration-underline">{{item.id.split("_")[0]}}</a>
+      <tr *ngFor="let item of assetList">
+          <td scope="row" style="min-width: 120px;"><a (click)="fetchAssetHistory(item,item.AssetId)" class="breakword cursor-pointer blue text-decoration-underline">{{item.AssetName}}</a>
           </td>
-        <td>{{item.id.split("_")[1]}}</td>
-        <td>
-          <span *ngIf="item.SharedBy!=null;else createdBy">{{item.SharedBy}}</span>
-          <ng-template #createdBy>{{item.email}}</ng-template>
+        <td>{{item.UniqueIdentifier}}</td>
+        <td>{{ item.EmployeeEmail}}</td>
+        <td><button *ngIf="item.Icon == 'T'" (click)="ShareConfiguration(item)" class="border-0 back-none"><a><img
+              src="/assets/images/Share.svg"></a></button>
+        <button *ngIf="item.Icon == 'R'" (click)="assetRequest()" class="border-0 back-none"><a><img
+              src="/assets/images/save-icon.svg"></a></button></td>
+        <td><a class="cursor-pointer" (click)="deleteAsset(item)"><img src="/assets/images/Delete-homepage.svg"></a>
         </td>
-        <td><button (click)="ShareConfiguration(item)" class="border-0 back-none"><a><img
-                src="/assets/images/Share.svg"></a></button></td>
-        <td><a class="cursor-pointer" (click)="deleteConfigFiles(item.id)"><img
-              src="/assets/images/Delete-homepage.svg"></a></td>
       </tr>
     </tbody>
   </table>
@@ -44,7 +43,7 @@
 <!-- No Configuratioin Data avaiable-->
 
 <!---- *ngIf="!!noConfig" -->
-<div class="no-Config-Data" *ngIf="!portalConfigData || noConfig">
+<div class="no-Config-Data" *ngIf="!assetList || noConfig">
   <div class="row flex-column text-center mtop">
     <div class="col">
       <div><img src="/assets/images/Empty-Folder.svg"></div>

@@ -3,6 +3,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { GenericConfigurationService } from '../../../services/generic-configuration.service';
 import { ConfirmModalComponent } from 'projects/commissioningwebportal-app/src/app/shared/confirm-modal/confirm-modal.component';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
+import { AlertService } from 'projects/commissioningwebportal-app/src/app/modules';
 
 @Component({
   selector: 'app-createasset',
@@ -11,7 +14,7 @@ import { ConfirmModalComponent } from 'projects/commissioningwebportal-app/src/a
 })
 export class CreateassetComponent implements OnInit {
 
-  addFormulaForm!: FormGroup;
+  addAssetForm!: FormGroup;
   formulaTypeList: any[];
   formulaNumberList: any[];
   formulaNameList: any;
@@ -26,14 +29,14 @@ export class CreateassetComponent implements OnInit {
   IsInvalid: boolean = false;
   @Input() selectedController: any;
   @Input() assetHeader:string;
+  @Input() assetList:any;
 
   popupObjectMessage: any = {};
 
 
   constructor(public activeModal: NgbActiveModal, private modalService: NgbModal,
-    private fb: FormBuilder, private genericConfigurationService: GenericConfigurationService) {
-    this.defalutLeninTypeData = null;
-    this.formulaNameList = this.leninTypeFormulaList();
+    private fb: FormBuilder, private genericConfigurationService: GenericConfigurationService,
+    private spinner:NgxSpinnerService, private router:Router, private alert:AlertService) {
   }
 
   ngOnInit(): void {
@@ -42,53 +45,29 @@ export class CreateassetComponent implements OnInit {
     this.initializeForm();
   }
   initializeForm() {
-   
+    this.addAssetForm = this.fb.group({
+      AssetName: new FormControl('', Validators.required),
+      UniqueIdentifier: new FormControl('', Validators.required),
+    });
   }
-  onChangeFormulaType($event) {
-    // set null formulaname value whenever change happen
-    this.addFormulaForm.controls['FormulaName'].setValue(null);
-    if ($event.value == 'LinenType') {
-      this.showFormulaName = true;
-    }
-    else {
-      this.showFormulaName = false;
-    }
-  }
-  leninTypeFormulaList() {
-    let formData: any = [];
-    for (let item of this.defalutLeninTypeData) {
-      formData.push(item.FormulaName);
-    }
-    return formData;
-  }
-
-
   // Get control value
-  get FormulaType() {
-    return this.addFormulaForm.get('FormulaType') as FormControl;
+  get AssetName() {
+    return this.addAssetForm.get('AssetName') as FormControl;
   }
-  get FormulaNumber() {
-    return this.addFormulaForm.get('FormulaNumber') as FormControl;
-  }
-  get FormulaName() {
-    return this.addFormulaForm.get('FormulaName') as FormControl;
+  get UniqueIdentifier() {
+    return this.addAssetForm.get('UniqueIdentifier') as FormControl;
   }
 
-  requestAsset() {
-    this.addFormulaForm['submitted'] = true;
-    // if (!this.addFormulaForm.valid) {
-    //   return;
-    // }
-    // check formula number exit or not
-    let value = {
-      index: this.index,
-      modifyFormulaValue: this.addFormulaForm.value,
+  createAsset() {
+    this.addAssetForm['submitted'] = true;
+    if (!this.addAssetForm.valid) {
+      return;
     }
-    let formulaArray = this.controlValue;
-    let selectedFormulaValue = value.modifyFormulaValue.FormulaNumber;
-    let filterformulaIndex = {};
+    let value :any={
+      data:this.addAssetForm.value
+    };
+    // check formula number exit or not
     let popupFlag = true;
-
     if (popupFlag) {
       const modalRef = this.modalService.open(ConfirmModalComponent, { size: 'sm', windowClass: 'el-confirm-modal' });
       modalRef.componentInstance.messageText = "Are you proceed for request";
@@ -96,6 +75,21 @@ export class CreateassetComponent implements OnInit {
       modalRef.componentInstance.cancelText = "Cancel";
       modalRef.result.then(res => {
         if (res) {
+          let jsonObj:any= {
+            AssetName :this.addAssetForm.get('AssetName')?.value,
+            UniqueIdentifier : this.addAssetForm.get('UniqueIdentifier')?.value,
+          };
+          this.genericConfigurationService.createAsset(jsonObj).subscribe(res => {
+            this.spinner.hide();
+            if (res) {
+              this.router.navigate([this.genericConfigurationService.routePath.concat('/saved-configuration')]);
+              this.alert.success("Asset created successfully", this.genericConfigurationService.setTimeOutValue, true);
+            }
+          }, (err: any) => {
+            console.log(err);
+            this.alert.error("Something went wrong while saving data", this.genericConfigurationService.setTimeOutValue, true);
+            this.spinner.hide();
+          });
           this.activeModal.close(value);
         }
         else {

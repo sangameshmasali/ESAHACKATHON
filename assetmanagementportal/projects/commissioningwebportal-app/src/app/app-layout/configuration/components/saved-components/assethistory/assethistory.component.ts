@@ -91,7 +91,7 @@ export class AssethistoryComponent implements OnInit {
           Id: getConfigId
         };
         let body = { body: reqData };
-        this.genericConfigurationService.deleteUpsertConfigFile(body).subscribe((res) => {
+        this.genericConfigurationService.deleteUser(body).subscribe((res) => {
           if (res) {
             this.portalConfigData = this.portalConfigData.filter(o => o.id !== getConfigId);
             this.alert.success(res, this.genericConfigurationService.setTimeOutValue, true);

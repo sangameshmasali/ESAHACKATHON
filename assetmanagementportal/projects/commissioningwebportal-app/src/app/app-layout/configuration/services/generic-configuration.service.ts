@@ -45,7 +45,7 @@ export class GenericConfigurationService {
   Standard: string = "Standard";
   Metric: string = "Metric";
   // setTimeOutValue
-  setTimeOutValue: number = 10000;
+  setTimeOutValue: number = 5000;
   routePath = '/dashboard/configuration';
 
   notAValue = [
@@ -126,8 +126,15 @@ export class GenericConfigurationService {
 
   // Create API call
 
-  CreateUpsertConfigFile(reqData: string, masterData) {
-    return this.httpClient.post(`${this.baseAPIProvider.baseCommissoioningwebApi}api/portal/upsertConfigFile?FileName=${this.getaPIConfigPara()}`, reqData)
+  createUser(reqData: string){
+    return this.httpClient.post(`${this.baseAPIProvider.baseCommissoioningwebApi}api/addUser`, reqData)
+      .pipe(
+        map((res: any) => { return res.body; })
+      );
+  }
+
+  createAsset(reqData: string){
+    return this.httpClient.post(`${this.baseAPIProvider.baseCommissoioningwebApi}api/addDevice`, reqData)
       .pipe(
         map((res: any) => { return res.body; })
       );
@@ -135,13 +142,22 @@ export class GenericConfigurationService {
 
   // Delete API call here
 
-  deleteUpsertConfigFile(reqData: any): Observable<any> {
-    return this.httpClient.delete(`${this.baseAPIProvider.baseCommissoioningwebApi}api/portal/deleteConfigFile`, reqData)
+  deleteUser(reqData: any): Observable<any> {
+    return this.httpClient.post(`${this.baseAPIProvider.baseCommissoioningwebApi}api/deleteUser`, reqData)
       .pipe(
         map((res: any) => {
           return res;
         })
       );
+  }
+
+  deleteAsset(reqData:string){
+    return this.httpClient.post(`${this.baseAPIProvider.baseCommissoioningwebApi}api/deleteDevice`, reqData)
+    .pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
   }
 
   // Share API call
@@ -533,6 +549,20 @@ export class GenericConfigurationService {
       return data;
     }
     else return null;
+  }
+
+  getAssetDetails(){
+    return this.httpClient.get(`${this.baseAPIProvider.baseCommissoioningwebApi}api/getAssetDetails`)
+    .pipe(
+      map((res: any) => { return res.body; })
+    );
+  }
+
+  getUserDetails(email:any){
+    return this.httpClient.get(`${this.baseAPIProvider.baseCommissoioningwebApi}api/getUserDetails?AssetId=${email}`)
+    .pipe(
+      map((res: any) => { return res.body; })
+    );
   }
 }
 

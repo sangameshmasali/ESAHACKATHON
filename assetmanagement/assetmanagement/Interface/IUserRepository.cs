@@ -10,6 +10,6 @@ namespace assetmanagement.Interface
         
         Task<bool> AddUserToDb(string connestionString, Employee employee);
         Task<bool> DeleteUserToDb(string connestionString, Employee employee);
-        Task<List<Employee>> GetUserDetailsFromDb(string connestionString);
+        Task<List<Employee>> GetUserDetailsFromDb(string connestionString, string email);
     }
 }

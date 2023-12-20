@@ -12,7 +12,7 @@ namespace assetmanagement.Repository
 {
     public class UserRepository : IUserRepository
     {
-        public async Task<List<Employee>> GetUserDetailsFromDb(string connestionString)
+        public async Task<List<Employee>> GetUserDetailsFromDb(string connestionString, string email)
         {
             try
             {
@@ -21,10 +21,15 @@ namespace assetmanagement.Repository
                 List<Employee> employees = new List<Employee>();
                 using (SqlConnection conn = new SqlConnection(connestionString))
                 {
+                    SqlCommand command;
                     await conn.OpenAsync();
-                    
-                    SqlCommand command = new SqlCommand("SELECT * FROM Employee where IsActive=1", conn);
-
+                    if (!string.IsNullOrEmpty(email)){
+                        command = new SqlCommand("SELECT * FROM Employee where IsActive=1 and Email = '"+email+"'", conn);
+                    }
+                    else
+                    {
+                        command = new SqlCommand("SELECT * FROM Employee where IsActive=1", conn);
+                    }
                     using (SqlDataReader oReader = command.ExecuteReader())
                     {
                         
@@ -33,6 +38,8 @@ namespace assetmanagement.Repository
                             Employee employee = new Employee();
                             employee.EmployeeId = oReader["EmployeeID"].ToString();
                             employee.Email = oReader["Email"].ToString();
+                            employee.EmployeeName = oReader["EmployeeName"].ToString();
+                            employee.IsAdmin = Convert.ToBoolean(oReader["IsAdmin"]);
                             employees.Add(employee);
                         }
 
@@ -76,7 +83,6 @@ namespace assetmanagement.Repository
                         }
                     }
                 }
-                return employee;
             }
 
             catch (Exception ex)

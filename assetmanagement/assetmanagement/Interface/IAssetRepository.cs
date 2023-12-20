@@ -9,5 +9,6 @@ namespace assetmanagement.Interface
         Task<List<Asset>> GetAssetDetailsFromDb(string connestionString);
         Task<bool> AddAssetToDb(string connestionString, Asset asset);
         Task<bool> DeleteAssetToDb(string connestionString, Asset employee);
+        Task<bool> AssetRequestToDb(string connestionString, AssetRequest asset);
     }
 }

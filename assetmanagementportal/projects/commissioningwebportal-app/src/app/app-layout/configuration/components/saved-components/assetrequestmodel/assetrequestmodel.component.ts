@@ -61,9 +61,7 @@ export class AssetrequestmodelComponent implements OnInit {
   }
   leninTypeFormulaList() {
     let formData: any = [];
-    for (let item of this.defalutLeninTypeData) {
-      formData.push(item.FormulaName);
-    }
+    
     return formData;
   }
 

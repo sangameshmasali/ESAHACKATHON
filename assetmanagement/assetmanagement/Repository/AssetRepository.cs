@@ -114,5 +114,45 @@ namespace assetmanagement.Repository
                 throw ex;
             }
         }
+
+        public async Task<bool> AssetRequestToDb(string connestionString, AssetRequest asset)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connestionString))
+                {
+                    await conn.OpenAsync();
+
+                    using (SqlCommand command = new SqlCommand("ASSETREQUESTPROC", conn))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@EmployeeEmail", asset.EmployeeEmail);
+                        command.Parameters.AddWithValue("@AssetID", asset.AssetID);
+                        command.Parameters.AddWithValue("@AdminRequest", asset.AdminRequest);
+                        command.Parameters.AddWithValue("@EmployeeRequest", asset.EmployeeRequest);
+                        command.Parameters.AddWithValue("@TransferRequest", asset.TransferRequest);
+                        command.Parameters.AddWithValue("@RequestedBy", asset.RequestedBy);
+                        command.Parameters.AddWithValue("@RequestedTo", asset.RequestedTo);
+                        command.Parameters.Add("@RowsAffected", SqlDbType.Int).Direction = ParameterDirection.Output;
+                        command.ExecuteNonQuery();
+                        int rowAffected = Convert.ToInt32(command.Parameters["@RowsAffected"].Value);
+                        conn.Close();
+                        if (rowAffected > 0)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

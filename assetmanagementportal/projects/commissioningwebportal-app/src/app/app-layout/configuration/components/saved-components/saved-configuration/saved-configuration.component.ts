@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NgbActiveModal, NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { userProfile } from 'projects/commissioningwebportal-app/src/app/models/user';
+import { Asset, userProfile } from 'projects/commissioningwebportal-app/src/app/models/user';
 import { AlertService } from 'projects/commissioningwebportal-app/src/app/modules/alert/alert.service';
 import { ConfirmModalComponent } from 'projects/commissioningwebportal-app/src/app/shared/confirm-modal/confirm-modal.component';
 import { LoggerService } from '../../../../core';
@@ -12,6 +12,7 @@ import { ShareConfigurationModelComponent } from '../../share-configuration/shar
 import { flagService } from '../../../services/flag-service';
 import { CreateassetComponent } from '../createasset/createasset.component';
 import { AssetrequestmodelComponent } from '../assetrequestmodel/assetrequestmodel.component';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-saved-configuration',
@@ -20,9 +21,10 @@ import { AssetrequestmodelComponent } from '../assetrequestmodel/assetrequestmod
 })
 export class SavedConfigurationComponent implements OnInit {
 
-  portalConfigData: any;
+  assetList: Asset[];
+  portalConfigData:any;
   noConfig: boolean = false;
-  userData: userProfile;
+  userData: any;
   disbaleBtn: boolean = false;
   isEditFlag: boolean = false;
   popupObjectMessage: any = {};
@@ -31,11 +33,14 @@ export class SavedConfigurationComponent implements OnInit {
 
   constructor(private router: Router, public activeModal: NgbActiveModal, private modalService: NgbModal, private genericConfigurationService: GenericConfigurationService, private translate: TranslateService,
     private spinner: NgxSpinnerService, private alert: AlertService, private loggerService: LoggerService,
-    private flagService: flagService) { }
+    private flagService: flagService) {
+
+      this.getAssetListDetails();
+     }
 
 
   ngOnInit(): void {
-    this.getPortalConfigFiles();
+    this.getAssetListDetails();
   }
 
 
@@ -53,38 +58,41 @@ export class SavedConfigurationComponent implements OnInit {
     return data;
   }
 
-  getPortalConfigFiles() {
+  getAssetListDetails() {
     this.spinner.show();
-    let userEmail = '';
-    this.loggerService.getUserDetails().subscribe(res => {
+    let assetList: any = [];
+    this.genericConfigurationService.getAssetDetails().subscribe(res => {
       if (res) {
-        userEmail = res.mail;
-    
+        this.loggerService.getUserDetails().subscribe(user => {
+          if(user){
+            res.forEach(asset => {
+              asset.Icon = asset.EmployeeEmail == user.mail ? 'T':'R';
+              assetList.push(asset); 
+            });
+          }
+          this.assetList = assetList;
+          this.spinner.hide();
+        })
       }
     });
-
-
   }
 
-  // Delete the config file
-
-  deleteConfigFiles(getConfigId) {
+  // Delete the asset
+  deleteAsset(Asset) {
     const modalRef = this.modalService.open(ConfirmModalComponent, { size: 'sm', windowClass: 'el-confirm-modal' });
     modalRef.componentInstance.messageText = "Are you sure you want to delete this configuration?";
-    modalRef.componentInstance.confirmText = this.popupObjectMessage.confirmWithYes;
-    modalRef.componentInstance.cancelText = this.popupObjectMessage.cancelText;
+    modalRef.componentInstance.confirmText = "Delete";
+    modalRef.componentInstance.cancelText = "Cancel";
     modalRef.result.then(res => {
       if (res) {
         this.spinner.show();
-        let reqData: any = {
-          Id: getConfigId
-        };
+        let reqData: any = Asset;
         let body = { body: reqData };
-        this.genericConfigurationService.deleteUpsertConfigFile(body).subscribe((res) => {
+        this.genericConfigurationService.deleteAsset(reqData).subscribe((res) => {
           if (res) {
-            this.portalConfigData = this.portalConfigData.filter(o => o.id !== getConfigId);
-            this.alert.success(res, this.genericConfigurationService.setTimeOutValue, true);
-            if (this.portalConfigData.length == 0) {
+            this.assetList = this.assetList.filter(o => o.AssetId !== Asset.AssetId);
+            this.alert.success(res.body, this.genericConfigurationService.setTimeOutValue, true);
+            if (this.assetList.length == 0) {
               this.noConfig = true;
             }
             this.spinner.hide();
@@ -116,10 +124,14 @@ export class SavedConfigurationComponent implements OnInit {
     const modalRef = this.modalService.open(CreateassetComponent, { size: '564' });
     //modalRef.componentInstance.index = i;
     modalRef.componentInstance.assetHeader = "Create New Asset";
+    modalRef.componentInstance.assetList = this.assetList;
     //modalRef.componentInstance.selectedController = this.selectedController;
     const promise = modalRef.result.then(
       res => {
-        if (res) {
+        delay(10000);
+        this.getAssetListDetails();
+        if (res) {  
+        
         }
       },
       dismiss => { }
@@ -174,7 +186,7 @@ export class SavedConfigurationComponent implements OnInit {
     const promise = modalRef.result.then(
       res => {
         if (res) {
-          this.getPortalConfigFiles();
+          //this.getPortalConfigFiles();
         }
       },
       dismiss => { }

@@ -1,6 +1,6 @@
-<form class="card form" [formGroup]="addFormulaForm" [ngClass]="{'formsubmitted': !!addFormulaForm['submitted']}">
+<form class="card form" [formGroup]="addEmployee" [ngClass]="{'formsubmitted': !!addEmployee['submitted']}">
     <div class="modal-header card-header fw-bold font-15">
-        <h4 class="mat-h4">{{ assetHeader}}</h4>
+        <h4 class="mat-h4">{{ assetHeader }}</h4>
         <button type="button" class="close font-24 border-0 blue bg-transparent" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -10,32 +10,32 @@
             <div class="row mb-3">
                 <div class="col">
                     <label for="Name" class="form-label">Employee Id</label>
-                    <input type="text" class="form-control"/>
+                    <input type="text" class="form-control" formControlName="EmployeeId"/>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col">
                     <label for="Name" class="form-label">Employee Email</label>
-                    <input type="text" class="form-control"/>
+                    <input type="text" class="form-control" formControlName="Email"/>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col">
                     <label for="Name" class="form-label">Employee Name</label>
-                    <input type="text" class="form-control"/>
+                    <input type="text" class="form-control" formControlName="EmployeeName"/>
                 </div>
             </div>
-            <div class="row mb-3">
+            <!-- <div class="row mb-3">
                 <div class="col">
                     <label for="Name" class="form-label">Is Admin ?</label>
-                    <input type="checkbox" class="form-control"/>
+                    <input type="checkbox" class="form-check-input"/>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="defaultbtn btn-next btnback bg-white w-auto mx-3"
             (click)="activeModal.close(false)">Cancel</button>
-        <button class="defaultbtn btn-next btn-width w-auto" type="submit" (click)="requestAsset()">Submit</button>
+        <button class="defaultbtn btn-next btn-width w-auto" type="submit" (click)="addUser()">Submit</button>
     </div>
 </form> 
